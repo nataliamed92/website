@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
+/*
+  ΝΑΤΑΛΙΑ ΦΟΥΡΛΑ - design tokens
+
+  Palette locked by the client brief: μαύρο, λευκό, μπέζ. The page is a single
+  dark theme end to end; sections never invert, they only move between two
+  near-black surfaces. One accent for the whole site: sand.
+
+  Radius rule: pill for interactive, 1rem for cards, .5rem for inputs.
+*/
+
+@theme {
+  /* Two near-blacks and nothing else. Never #000: it flattens the photography. */
+  --color-ink-950: #08090a;
+  --color-ink-900: #0d0f11;
+  --color-ink-850: #141719;
+  --color-ink-800: #1c2023;
+  --color-ink-700: #2a2f33;
+
+  /* The white side of the brief, warmed a half-step so it sits with the sand. */
+  --color-bone: #f4f1ec;
+  --color-bone-dim: #b9b4ab;
+  --color-bone-mute: #7d7975;
+
+  /* Beige, the single interactive accent. Cool-leaning sand, not brass. */
+  --color-sand-300: #ddd0b8;
+  --color-sand-400: #c9b795;
+  --color-sand-500: #b09b74;
+  --color-sand-600: #8d7a58;
+
+  --font-display: var(--font-display-face), "Helvetica Neue", sans-serif;
+  --font-sans: var(--font-body-face), system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --radius-field: 0.5rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-ink-950);
+  color: var(--color-bone);
+}
+
+::selection {
+  background: var(--color-sand-400);
+  color: var(--color-ink-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sand-400);
+  outline-offset: 3px;
+}
+
+/* Grain sits on a fixed, non-interactive layer so scrolling never repaints it. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* A hairline that fades at both ends. Used to close sections without a box. */
+.rule-fade {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-ink-700) 18%,
+    var(--color-ink-700) 82%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
