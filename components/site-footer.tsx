@@ -1,4 +1,6 @@
-import { contact, doctor, social } from "@/lib/content";
+import Image from "next/image";
+
+import { brand, contact, doctor, social } from "@/lib/content";
 
 export default function SiteFooter() {
   return (
@@ -6,12 +8,14 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div>
-            <p className="font-display text-[17px] tracking-[0.14em] text-bone uppercase">
-              {doctor.name}
-            </p>
-            <p className="mt-3 max-w-[34ch] text-[14px] leading-relaxed text-bone-mute">
-              {doctor.specialty}, {doctor.subSpecialty}
-            </p>
+            <Image
+              src={brand.lockup}
+              alt={`${doctor.fullName}, ${doctor.specialty}`}
+              width={512}
+              height={512}
+              sizes="260px"
+              className="h-auto w-[220px] sm:w-[260px]"
+            />
           </div>
 
           <div className="flex flex-col gap-3 text-[14px] sm:items-end">

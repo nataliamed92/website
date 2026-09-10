@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: doctor.fullName,
     title: `${doctor.fullName} · ${doctor.specialty}`,
     description,
-    images: [{ url: "/img/hero-marble.jpg", width: 3168, height: 1344 }],
+    images: [{ url: "/video/hero-poster.jpg", width: 1920, height: 1080 }],
   },
   alternates: { canonical: "/" },
 };

@@ -32,7 +32,8 @@ export default function SiteHeader() {
       <div className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="font-display text-[17px] leading-none tracking-[0.14em] text-bone uppercase"
+          aria-label={doctor.fullName}
+          className="text-[15px] leading-none font-light tracking-[0.3em] text-bone uppercase"
         >
           {doctor.name}
         </Link>

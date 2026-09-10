@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "@/components/reveal";
-import { contact, images } from "@/lib/content";
+import { brand, contact, images } from "@/lib/content";
 
 /**
  * Layout family: full-width media with a single overlaid panel. This is the
@@ -24,6 +24,15 @@ export default function ContactSection() {
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-28 sm:px-8 sm:py-36">
         <Reveal className="mx-auto max-w-[42rem] text-center">
           <div>
+            <Image
+              src={brand.mark}
+              alt=""
+              aria-hidden
+              width={512}
+              height={300}
+              sizes="150px"
+              className="mx-auto mb-9 h-auto w-[118px] opacity-90 sm:w-[150px]"
+            />
             <h2 className="font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[1.08] font-normal text-bone">
               Κλείστε ραντεβού
             </h2>

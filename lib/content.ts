@@ -172,8 +172,27 @@ export const social = [
  * intake form supplied no usable clinic or portrait images, so nothing here is
  * presented as a real room, a real patient or a real result.
  */
+export const brand = {
+  /** Chosen from the client's six-concept sheet: white line art on dark. */
+  lockup: "/brand/logo-lockup.png",
+  mark: "/brand/logo-mark.png",
+} as const;
+
+/**
+ * The hero film: the logo drawing itself on black. Rendered by
+ * `tools/make-logo-video.py`, which is deterministic, so re-running it
+ * reproduces these files exactly.
+ */
+export const video = {
+  heroLandscape: "/video/hero-16x9.mp4",
+  heroPortrait: "/video/hero-9x16.mp4",
+  poster: "/video/hero-poster.jpg",
+  /** Standalone films with the wordmark, for Instagram and TikTok. */
+  filmLandscape: "/video/logo-16x9.mp4",
+  filmPortrait: "/video/logo-9x16.mp4",
+} as const;
+
 export const images = {
-  hero: "/img/hero-marble.jpg",
   instruments: "/img/instruments.jpg",
   profile: "/img/profile-study.jpg",
   room: "/img/consultation-room.jpg",

@@ -1,26 +1,41 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { contact, doctor, images } from "@/lib/content";
+import { contact, doctor, video } from "@/lib/content";
 
 /**
- * Asymmetric hero. The marble profile occupies the right of the frame and the
- * copy sits in the empty black of the left, so no scrim is needed over type.
+ * Asymmetric hero. The backdrop is the logo drawing itself on a black frame,
+ * held right of centre so the headline keeps the left. Nothing else is in the
+ * shot: the mark is the whole image.
  *
- * Motion: the stone drifts a little slower than the page on scroll. It gives
- * the opening depth and marks the hero as a layer the reader is leaving.
+ * Motion: the frame drifts a little slower than the page on scroll, which marks
+ * the hero as a layer the reader is leaving. The film itself loops on black.
  */
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const [portrait, setPortrait] = useState<boolean | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const fade = useTransform(scrollYProgress, [0, 0.85], [1, 0.25]);
+
+  // Two cuts of the same film. Only the one that fits the viewport is mounted,
+  // so a phone never downloads the landscape master.
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setPortrait(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  const src = portrait ? video.heroPortrait : video.heroLandscape;
 
   return (
     <section
@@ -31,18 +46,31 @@ export default function Hero() {
         style={reduce ? undefined : { y, opacity: fade }}
         className="absolute inset-0 z-0"
       >
-        <Image
-          src={images.hero}
-          alt="Λεπτομέρεια αρχαίου ελληνικού μαρμάρινου προσώπου σε πλάγια όψη, φωτισμένη σε σκοτεινό φόντο"
-          fill
-          priority
-          sizes="100vw"
-          className="scale-105 object-cover object-[60%_72%] lg:object-[70%_center]"
-        />
-        {/* Two scrims: one horizontal for the copy, one at the foot for the
-            handoff into the next section. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-transparent lg:via-ink-950/60" />
-        <div className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-ink-950 via-ink-950/85 to-transparent lg:h-56 lg:via-transparent" />
+        {reduce || portrait === null ? (
+          <Image
+            src={video.poster}
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[62%_center]"
+          />
+        ) : (
+          <video
+            key={src}
+            src={src}
+            poster={video.poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden
+            className="h-full w-full object-cover object-[62%_center]"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/45 to-transparent lg:via-ink-950/18" />
+        <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-ink-950 via-ink-950/70 to-transparent lg:h-52 lg:via-transparent" />
       </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pt-24 sm:px-8">
