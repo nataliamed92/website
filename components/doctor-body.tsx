@@ -8,7 +8,7 @@ import { credentials, images } from "@/lib/content";
  */
 export default function DoctorBody() {
   return (
-    <section className="bg-ink-950 pb-24 sm:pb-32">
+    <section className="bg-ink-950 pb-16 sm:pb-32">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Reveal>

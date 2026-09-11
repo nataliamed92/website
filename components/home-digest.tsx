@@ -20,7 +20,7 @@ export default function HomeDigest() {
   return (
     <>
       {/* Layout family: sticky split. */}
-      <section className="bg-ink-950 py-24 sm:py-32">
+      <section className="bg-ink-950 py-16 sm:py-32">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-20">
           <Reveal>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-card">
@@ -46,7 +46,7 @@ export default function HomeDigest() {
             </p>
             <Link
               href="/iatros"
-              className="group mt-9 inline-flex items-center gap-2.5 text-[14.5px] font-medium text-sand-300"
+              className="group mt-7 inline-flex min-h-11 items-center gap-2.5 py-2 text-[14.5px] font-medium text-sand-300"
             >
               Εκπαίδευση και εξειδικεύσεις
               <ArrowRight
@@ -60,7 +60,7 @@ export default function HomeDigest() {
       </section>
 
       {/* Layout family: two-card split, the two halves of the practice. */}
-      <section className="bg-ink-900 py-20 sm:py-28">
+      <section className="bg-ink-900 py-14 sm:py-28">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Reveal>
@@ -189,7 +189,7 @@ export default function HomeDigest() {
             </dl>
             <Link
               href="/iatreio"
-              className="group mt-12 inline-flex items-center gap-2.5 text-[14.5px] font-medium text-sand-300"
+              className="group mt-10 inline-flex min-h-11 items-center gap-2.5 py-2 text-[14.5px] font-medium text-sand-300"
             >
               Δείτε τον χώρο
               <ArrowRight

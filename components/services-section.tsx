@@ -18,7 +18,7 @@ export default function ServicesSection() {
   const current = services.find((s) => s.slug === active) ?? services[0];
 
   return (
-    <section className="bg-ink-900 py-20 sm:py-28">
+    <section className="bg-ink-900 py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-wrap gap-2.5">
           {services.map((s) => {
@@ -42,7 +42,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
-          <div className="min-h-[22rem]">
+          <div className="lg:min-h-[22rem]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.slug}

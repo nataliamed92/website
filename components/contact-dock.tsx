@@ -1,22 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { Phone } from "@phosphor-icons/react";
 import { contact } from "@/lib/content";
 
 /**
- * Phone is the only booking channel the practice gave, so it stays reachable.
- * It appears only past the hero: inside the hero it would sit on top of the
- * secondary call to action.
+ * Phone is the only booking channel the practice gave, so it stays one tap away
+ * on a phone. It hides in two places:
+ *
+ *  - over the hero, where it would sit on the secondary call to action;
+ *  - over any block marked `data-dock-hide`, which is every section that already
+ *    carries the phone number. Floating on top of a real button is worse than
+ *    not being there.
  */
 export default function ContactDock() {
-  const [shown, setShown] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+  const pathname = usePathname();
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (v) => {
-    setShown(v > window.innerHeight * 0.9);
+    setPastHero(v > window.innerHeight * 0.9);
   });
+
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll("[data-dock-hide]"));
+    if (!targets.length) return;
+
+    const visible = new Set<Element>();
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      setBlocked(visible.size > 0);
+    });
+
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, [pathname]);
+
+  const shown = pastHero && !blocked;
 
   return (
     <a

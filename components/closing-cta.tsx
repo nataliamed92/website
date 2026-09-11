@@ -9,7 +9,7 @@ import { brand, contact, images } from "@/lib/content";
  */
 export default function ClosingCta() {
   return (
-    <section className="relative overflow-hidden bg-ink-950">
+    <section data-dock-hide className="relative overflow-hidden bg-ink-950">
       <div className="absolute inset-0 z-0">
         <Image
           src={images.avenue}

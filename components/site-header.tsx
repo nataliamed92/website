@@ -32,7 +32,7 @@ export default function SiteHeader() {
         <Link
           href="/"
           aria-label={doctor.fullName}
-          className="flex items-center gap-2.5 sm:gap-3.5"
+          className="-my-2 flex min-h-11 items-center gap-2.5 py-2 sm:gap-3.5"
         >
           <Image
             src={brand.markSmall}
@@ -74,7 +74,7 @@ export default function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label={open ? "Κλείσιμο μενού" : "Άνοιγμα μενού"}
-          className="text-bone lg:hidden"
+          className="-mr-2.5 flex h-11 w-11 items-center justify-center text-bone lg:hidden"
         >
           {open ? <X size={24} weight="light" /> : <List size={24} weight="light" />}
         </button>

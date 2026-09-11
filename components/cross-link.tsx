@@ -23,7 +23,7 @@ export default function CrossLink({
   imageAlt: string;
 }) {
   return (
-    <section className="bg-ink-950 py-20 sm:py-28">
+    <section className="bg-ink-950 py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           <Link

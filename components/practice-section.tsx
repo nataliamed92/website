@@ -9,7 +9,7 @@ import { contact, hours, images } from "@/lib/content";
  */
 export default function PracticeSection() {
   return (
-    <section className="bg-ink-900 py-20 sm:py-28">
+    <section className="bg-ink-900 py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2">
           <Reveal className="lg:col-span-2 lg:row-span-2">

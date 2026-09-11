@@ -14,7 +14,7 @@ export default function PageHeader({
   lead?: string;
 }) {
   return (
-    <section className="bg-ink-950 pt-36 pb-14 sm:pt-44 sm:pb-20">
+    <section className="bg-ink-950 pt-32 pb-10 sm:pt-44 sm:pb-20">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           {eyebrow ? (

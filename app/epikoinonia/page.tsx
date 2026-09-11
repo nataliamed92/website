@@ -37,7 +37,7 @@ export default function Page() {
       />
 
       {/* Layout family: two priority actions above a quiet detail column. */}
-      <section className="bg-ink-950 pb-20 sm:pb-28">
+      <section className="bg-ink-950 pb-14 sm:pb-28">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Reveal>
@@ -120,7 +120,7 @@ export default function Page() {
             <Reveal delay={0.16}>
               <div className="flex h-full flex-col rounded-card bg-ink-900 p-8">
                 <h2 className="font-display text-[22px] text-bone">Στα social</h2>
-                <ul className="mt-6 space-y-4">
+                <ul className="mt-4 space-y-1">
                   {social.map((s) => {
                     const Icon = socialIcon[s.label as keyof typeof socialIcon];
                     return (
@@ -129,7 +129,7 @@ export default function Page() {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-3 text-[15px] text-bone-dim transition-colors hover:text-sand-300"
+                          className="flex min-h-11 items-center gap-3 py-1.5 text-[15px] text-bone-dim transition-colors hover:text-sand-300"
                         >
                           <Icon size={20} weight="light" />
                           {s.handle}
