@@ -176,6 +176,8 @@ export const brand = {
   /** Chosen from the client's six-concept sheet: white line art on dark. */
   lockup: "/brand/logo-lockup.png",
   mark: "/brand/logo-mark.png",
+  /** Thicker strokes, cropped to the head. For anything under ~48px. */
+  markSmall: "/brand/logo-mark-sm.png",
 } as const;
 
 /**

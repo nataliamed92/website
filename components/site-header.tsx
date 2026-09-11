@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
-import { contact, doctor } from "@/lib/content";
+import { brand, contact, doctor } from "@/lib/content";
 
 const nav = [
   { label: "Η ιατρός", href: "#iatros" },
@@ -33,9 +34,20 @@ export default function SiteHeader() {
         <Link
           href="/"
           aria-label={doctor.fullName}
-          className="text-[15px] leading-none font-light tracking-[0.3em] text-bone uppercase"
+          className="flex items-center gap-2.5 sm:gap-3.5"
         >
-          {doctor.name}
+          <Image
+            src={brand.markSmall}
+            alt=""
+            aria-hidden
+            width={234}
+            height={320}
+            priority
+            className="h-[34px] w-auto sm:h-[40px]"
+          />
+          <span className="text-[12.5px] leading-none font-light tracking-[0.24em] text-bone uppercase sm:text-[15px] sm:tracking-[0.3em]">
+            {doctor.name}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

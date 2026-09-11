@@ -15,7 +15,7 @@ edge, which a threshold or a colour key would destroy.
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 SHEET = ROOT / "tools" / "logo-source-sheet.jpg"
@@ -49,6 +49,21 @@ def key_out_ground(img: Image.Image) -> Image.Image:
     return Image.fromarray(rgba)
 
 
+def tight_box(img: Image.Image, threshold: int = 25) -> tuple[int, int, int, int]:
+    """
+    Bounding box of the real line work.
+
+    `Image.getbbox()` is useless here: the luminance key leaves a handful of
+    near-zero stray pixels out at the tile edges, so it always returns the full
+    frame. Ignoring everything under a threshold finds the actual artwork.
+    """
+    a = np.asarray(img.split()[3])
+    ys, xs = np.nonzero(a > threshold)
+    if not len(xs):
+        return (0, 0, img.width, img.height)
+    return (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)
+
+
 def trim(img: Image.Image, pad: int = 8) -> Image.Image:
     box = img.split()[3].getbbox()
     if not box:
@@ -76,9 +91,21 @@ def main() -> None:
     lockup.save(OUT / "logo-lockup.png")
     mark.save(OUT / "logo-mark.png")
 
-    # The favicon crops to the head so the profile fills the box. The mark is
-    # hairline work and disappears at 32px if it keeps the lockup's margins.
-    face = mark.crop(mark.split()[3].getbbox())
+    # Cropped to the artwork itself, the profile is portrait rather than the
+    # landscape frame the lockup gives it. Everything small is built from this.
+    face = mark.crop(tight_box(mark))
+
+    # A navbar-sized cut. At roughly 40px the original hairlines fall below a
+    # device pixel and grey out, so the strokes are thickened just enough to
+    # survive. Used only at small sizes; the full mark stays untouched.
+    thick = Image.merge(
+        "RGBA", (*face.split()[:3], face.split()[3].filter(ImageFilter.MaxFilter(3)))
+    )
+    sm_h = 320
+    thick.resize(
+        (max(round(face.width * sm_h / face.height), 1), sm_h), Image.LANCZOS
+    ).save(OUT / "logo-mark-sm.png")
+
     inner = round(512 * 0.86)
     scale = inner / max(face.width, face.height)
     face = face.resize(
