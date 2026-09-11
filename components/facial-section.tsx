@@ -8,7 +8,7 @@ import { facialSurgery, images } from "@/lib/content";
  */
 export default function FacialSection() {
   return (
-    <section id="prosopo" className="relative scroll-mt-20 overflow-hidden bg-ink-950">
+    <section className="relative overflow-hidden bg-ink-950">
       <div className="absolute inset-0 z-0">
         <Image
           src={images.profile}
@@ -22,16 +22,7 @@ export default function FacialSection() {
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-24 sm:px-8 sm:py-32">
         <div className="lg:ml-auto lg:w-[58%]">
-          <Reveal>
-            <h2 className="max-w-[16ch] font-display text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.1] font-normal text-bone">
-              {facialSurgery.title}
-            </h2>
-            <p className="mt-6 max-w-[48ch] text-[16px] leading-relaxed text-bone-dim sm:text-[17.5px]">
-              {facialSurgery.lead}
-            </p>
-          </Reveal>
-
-          <dl className="mt-14 border-t border-ink-800/80">
+          <dl className="border-t border-ink-800/80">
             {facialSurgery.items.map((item, i) => (
               <Reveal key={item.name} delay={i * 0.08}>
                 <div className="grid grid-cols-1 gap-1.5 border-b border-ink-800/80 py-6 sm:grid-cols-[minmax(0,13rem)_minmax(0,1fr)] sm:gap-8 sm:py-7">

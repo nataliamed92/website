@@ -9,15 +9,9 @@ import { contact, hours, images } from "@/lib/content";
  */
 export default function PracticeSection() {
   return (
-    <section id="iatreio" className="scroll-mt-20 bg-ink-900 py-24 sm:py-32">
+    <section className="bg-ink-900 py-20 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <Reveal>
-          <h2 className="max-w-[20ch] font-display text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.1] font-normal text-bone">
-            Το ιατρείο
-          </h2>
-        </Reveal>
-
-        <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2">
           <Reveal className="lg:col-span-2 lg:row-span-2">
             <div className="relative h-64 w-full overflow-hidden rounded-card sm:h-96 lg:h-full lg:min-h-[30rem]">
               <Image

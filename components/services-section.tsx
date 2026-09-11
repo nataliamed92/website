@@ -18,13 +18,9 @@ export default function ServicesSection() {
   const current = services.find((s) => s.slug === active) ?? services[0];
 
   return (
-    <section id="ypiresies" className="scroll-mt-20 bg-ink-900 py-24 sm:py-32">
+    <section className="bg-ink-900 py-20 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <h2 className="max-w-[18ch] font-display text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.1] font-normal text-bone">
-          Ωτορινολαρυγγολογία, από τη διάγνωση ως τη θεραπεία
-        </h2>
-
-        <div className="mt-12 flex flex-wrap gap-2.5">
+        <div className="flex flex-wrap gap-2.5">
           {services.map((s) => {
             const on = s.slug === active;
             return (

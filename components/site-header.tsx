@@ -2,32 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
-import { brand, contact, doctor } from "@/lib/content";
-
-const nav = [
-  { label: "Η ιατρός", href: "#iatros" },
-  { label: "Υπηρεσίες", href: "#ypiresies" },
-  { label: "Πρόσωπο", href: "#prosopo" },
-  { label: "Ιατρείο", href: "#iatreio" },
-];
+import { brand, contact, doctor, nav } from "@/lib/content";
 
 export default function SiteHeader() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const { scrollY } = useScroll();
 
   // Feedback: the bar earns a surface only once it leaves the hero.
   useMotionValueEvent(scrollY, "change", (v) => setSolid(v > 80));
 
+  // Only the home page opens on a full-bleed hero the bar can float over.
+  const overHero = pathname === "/" && !solid;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        solid
-          ? "border-b border-ink-800 bg-ink-950/85 backdrop-blur-xl"
-          : "border-b border-transparent"
+        overHero
+          ? "border-b border-transparent"
+          : "border-b border-ink-800 bg-ink-950/85 backdrop-blur-xl"
       }`}
     >
       <div className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
@@ -52,13 +50,16 @@ export default function SiteHeader() {
 
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
-              className="text-[13.5px] text-bone-dim transition-colors hover:text-sand-300"
+              aria-current={pathname === item.href ? "page" : undefined}
+              className={`text-[13.5px] transition-colors hover:text-sand-300 ${
+                pathname === item.href ? "text-sand-300" : "text-bone-dim"
+              }`}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <a
             href={contact.phone.href}
@@ -88,14 +89,17 @@ export default function SiteHeader() {
         >
           <nav className="flex flex-col">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-ink-850 py-4 text-[15px] text-bone-dim"
+                aria-current={pathname === item.href ? "page" : undefined}
+                className={`border-b border-ink-850 py-4 text-[15px] ${
+                  pathname === item.href ? "text-sand-300" : "text-bone-dim"
+                }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <a
               href={contact.phone.href}

@@ -7,9 +7,9 @@ import { brand, contact, images } from "@/lib/content";
  * Layout family: full-width media with a single overlaid panel. This is the
  * last thing on the page, so it carries one action and nothing else.
  */
-export default function ContactSection() {
+export default function ClosingCta() {
   return (
-    <section id="epikoinonia" className="relative scroll-mt-20 overflow-hidden bg-ink-950">
+    <section className="relative overflow-hidden bg-ink-950">
       <div className="absolute inset-0 z-0">
         <Image
           src={images.avenue}

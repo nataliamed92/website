@@ -9,6 +9,18 @@
 
 export const siteUrl = "https://natalia-fourla.vercel.app";
 
+/**
+ * The site's routes, in nav order. Header, footer and sitemap all read this,
+ * so a page is added in exactly one place.
+ */
+export const nav = [
+  { label: "Η ιατρός", href: "/iatros" },
+  { label: "Υπηρεσίες", href: "/ypiresies" },
+  { label: "Πρόσωπο", href: "/prosopo" },
+  { label: "Ιατρείο", href: "/iatreio" },
+  { label: "Επικοινωνία", href: "/epikoinonia" },
+] as const;
+
 export const doctor = {
   name: "Ναταλία Φούρλα",
   credentials: "MD, MSc",

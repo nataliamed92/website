@@ -1,13 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import { brand, contact, doctor, social } from "@/lib/content";
+import { brand, contact, doctor, nav, social } from "@/lib/content";
 
 export default function SiteFooter() {
   return (
     <footer className="border-t border-ink-850 bg-ink-950">
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
-          <div>
+          <div className="sm:max-w-[18rem]">
             <Image
               src={brand.lockup}
               alt={`${doctor.fullName}, ${doctor.specialty}`}
@@ -17,6 +18,18 @@ export default function SiteFooter() {
               className="h-auto w-[220px] sm:w-[260px]"
             />
           </div>
+
+          <nav className="flex flex-col gap-3 text-[14px]">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-bone-dim hover:text-sand-300"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
           <div className="flex flex-col gap-3 text-[14px] sm:items-end">
             <a href={contact.phone.href} className="text-bone-dim hover:text-sand-300">
