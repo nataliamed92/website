@@ -5,7 +5,7 @@ import { brand, contact, doctor, nav, social } from "@/lib/content";
 
 export default function SiteFooter() {
   return (
-    <footer data-dock-hide className="border-t border-ink-850 bg-ink-950">
+    <footer data-dock-hide className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="sm:max-w-[18rem]">
@@ -24,7 +24,7 @@ export default function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="py-2.5 text-bone-dim hover:text-sand-300"
+                className="py-2.5 text-brand-700 hover:text-brand-800"
               >
                 {item.label}
               </Link>
@@ -32,13 +32,13 @@ export default function SiteFooter() {
           </nav>
 
           <div className="flex flex-col gap-0.5 text-[14px] sm:items-end">
-            <a href={contact.phone.href} className="py-2.5 text-bone-dim hover:text-sand-300">
+            <a href={contact.phone.href} className="py-2.5 text-brand-700 hover:text-brand-800">
               {contact.phone.display}
             </a>
-            <a href={`mailto:${contact.email}`} className="py-2.5 text-bone-dim hover:text-sand-300">
+            <a href={`mailto:${contact.email}`} className="py-2.5 text-brand-700 hover:text-brand-800">
               {contact.email}
             </a>
-            <p className="py-2.5 text-bone-mute">
+            <p className="py-2.5 text-brand-600">
               {contact.address.street}, {contact.address.city}
             </p>
             <div className="mt-2 flex gap-5">
@@ -48,7 +48,7 @@ export default function SiteFooter() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-2.5 text-bone-dim hover:text-sand-300"
+                  className="py-2.5 text-brand-700 hover:text-brand-800"
                 >
                   {s.label}
                 </a>
@@ -58,7 +58,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="rule-fade mt-12" />
-        <p className="mt-6 text-[12.5px] text-bone-mute">
+        <p className="mt-6 text-[12.5px] text-brand-600">
           © {new Date().getFullYear()} {doctor.fullName}
         </p>
       </div>

@@ -12,13 +12,25 @@ hard-coded στοιχεία, οπότε οι αλλαγές γίνονται μ�
 
 ## Λογότυπο
 
-Ο πελάτης έστειλε ένα JPEG με έξι προτάσεις λογοτύπου σε πλέγμα 3x2
-(`tools/logo-source-sheet.jpg`). Επιλέχθηκε το κάτω μεσαίο: λευκό line art σε
-σκούρο φόντο. Το `tools/prepare-logo.py` κόβει το πλακίδιο και ανακτά το κανάλι
-διαφάνειας από τη φωτεινότητα, παράγοντας τα αρχεία στο `public/brand/`.
+Πηγή: `tools/logo-source.jpg` (ανοιχτό μπεζ line art σε μαύρο). Το
+`tools/prepare-logo.py` ανακτά το κανάλι διαφάνειας από τη φωτεινότητα και
+ξαναχρωματίζει το σχέδιο, παράγοντας τα αρχεία στο `public/brand/`.
 
-Τα αρχεία είναι raster 512px, όχι vector. Για μεγάλα μεγέθη (πινακίδα, έντυπα)
+Το πρωτότυπο μπεζ (#F5E0CC) έχει λόγο αντίθεσης 1.08:1 σε λευκό, δηλαδή είναι
+αόρατο στο θέμα του site. Γι' αυτό παράγονται δύο εκδοχές στο ίδιο hue: η
+σκούρη (#704C29, 7.7:1) για λευκό φόντο και η ανοιχτή (`-on-dark`) για πάνω σε
+σκούρες φωτογραφίες.
+
+Τα αρχεία είναι raster, όχι vector. Για μεγάλα μεγέθη (πινακίδα, έντυπα)
 χρειάζεται καθαρό ξανασχεδίασμα σε vector.
+
+**Απαιτεί Pillow και numpy.** Ο python3 του Homebrew (3.14) δεν τα έχει· το
+`/usr/bin/python3` τα έχει:
+
+```bash
+/usr/bin/python3 tools/prepare-logo.py
+/usr/bin/python3 tools/make-logo-video.py
+```
 
 ## Video
 
@@ -30,8 +42,8 @@ hard-coded στοιχεία, οπότε οι αλλαγές γίνονται μ�
 μαύρο ώστε να κάνουν loop χωρίς ραφή.
 
 ```bash
-python3 tools/make-logo-video.py --fast   # preview μισής ανάλυσης
-python3 tools/make-logo-video.py          # τελικό
+/usr/bin/python3 tools/make-logo-video.py --fast   # preview μισής ανάλυσης
+/usr/bin/python3 tools/make-logo-video.py          # τελικό
 ```
 
 ## Φωτογραφίες

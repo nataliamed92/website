@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     siteName: doctor.fullName,
     title: `${doctor.fullName} · ${doctor.specialty}`,
     description,
-    images: [{ url: "/video/hero-poster.jpg", width: 1920, height: 1080 }],
+    images: [{ url: "/brand/og.png", width: 1200, height: 630 }],
   },
   alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090a",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light",
 };
 
 const physicianSchema = {
@@ -96,10 +96,10 @@ export default function RootLayout({
       lang="el"
       className={`${garamond.variable} ${commissioner.variable} h-full antialiased`}
     >
-      <body className="grain flex min-h-full flex-col bg-ink-950">
+      <body className="flex min-h-full flex-col bg-paper">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:rounded-full focus:bg-sand-400 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink-950"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:rounded-full focus:bg-brand-600 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
         >
           Μετάβαση στο περιεχόμενο
         </a>

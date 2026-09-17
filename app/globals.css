@@ -3,31 +3,41 @@
 /*
   ΝΑΤΑΛΙΑ ΦΟΥΡΛΑ - design tokens
 
-  Palette locked by the client brief: μαύρο, λευκό, μπέζ. The page is a single
-  dark theme end to end; sections never invert, they only move between two
-  near-black surfaces. One accent for the whole site: sand.
+  Light theme: white ground, lettering in a dark beige taken from the logo.
+  The whole ramp sits on the logo's own hue (29.3 degrees, sampled from the
+  artwork), darkened until each step earns its contrast rather than picked by
+  eye. The page is a single light theme end to end; sections never invert,
+  they only move between white and two warm off-whites.
+
+  Contrast against white, measured:
+    brand-900 #372512  14.66:1   headings
+    brand-800 #51361d  11.06:1   body
+    brand-700 #704c29   7.66:1   secondary text, the logo itself
+    brand-600 #8c6036   5.48:1   muted text, icons, links, button fill
+    brand-500 #ae7947   3.73:1   large text and decoration only, never body
 
   Radius rule: pill for interactive, 1rem for cards, .5rem for inputs.
 */
 
 @theme {
-  /* Two near-blacks and nothing else. Never #000: it flattens the photography. */
-  --color-ink-950: #08090a;
-  --color-ink-900: #0d0f11;
-  --color-ink-850: #141719;
-  --color-ink-800: #1c2023;
-  --color-ink-700: #2a2f33;
+  /* Grounds: pure white, plus two warm off-whites so bands separate without
+     a border. */
+  --color-paper: #ffffff;
+  --color-paper-warm: #faf6f2;
+  --color-paper-card: #f4ece3;
 
-  /* The white side of the brief, warmed a half-step so it sits with the sand. */
-  --color-bone: #f4f1ec;
-  --color-bone-dim: #b9b4ab;
-  --color-bone-mute: #7d7975;
+  --color-line: #ece0d3;
+  --color-line-strong: #ddc9b2;
 
-  /* Beige, the single interactive accent. Cool-leaning sand, not brass. */
-  --color-sand-300: #ddd0b8;
-  --color-sand-400: #c9b795;
-  --color-sand-500: #b09b74;
-  --color-sand-600: #8d7a58;
+  /* The lettering ramp. */
+  --color-brand-900: #372512;
+  --color-brand-800: #51361d;
+  --color-brand-700: #704c29;
+  --color-brand-600: #8c6036;
+  --color-brand-500: #ae7947;
+  --color-brand-400: #cca075;
+  --color-brand-300: #e2c1a2;
+  --color-brand-200: #eddac8;
 
   --font-display: var(--font-display-face), "Helvetica Neue", sans-serif;
   --font-sans: var(--font-body-face), system-ui, sans-serif;
@@ -39,7 +49,7 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -49,39 +59,28 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-ink-950);
-  color: var(--color-bone);
+  background-color: var(--color-paper);
+  color: var(--color-brand-800);
 }
 
 ::selection {
-  background: var(--color-sand-400);
-  color: var(--color-ink-950);
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-sand-400);
+  outline: 2px solid var(--color-brand-600);
   outline-offset: 3px;
 }
 
-/* Grain sits on a fixed, non-interactive layer so scrolling never repaints it. */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* A hairline that fades at both ends. Used to close sections without a box. */
+/* A hairline that fades at both ends. Closes a section without a box. */
 .rule-fade {
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-ink-700) 18%,
-    var(--color-ink-700) 82%,
+    var(--color-line) 18%,
+    var(--color-line) 82%,
     transparent
   );
 }

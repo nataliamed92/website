@@ -31,9 +31,13 @@ BRAND = ROOT / "public" / "brand"
 OUT = ROOT / "public" / "video"
 
 FPS = 30
-INK = np.array([8, 9, 10], dtype=np.float32) / 255.0
-BONE = np.array([244, 241, 236], dtype=np.float32) / 255.0
-SAND = np.array([201, 183, 149], dtype=np.float32) / 255.0
+
+# Light theme: white ground, the logo drawn in its own dark beige. The film is
+# composited subtractively - ink is removed from a white frame - because a white
+# page cannot be lit, only shaded.
+PAPER = np.array([255, 255, 255], dtype=np.float32) / 255.0
+INK = np.array([0x70, 0x4C, 0x29], dtype=np.float32) / 255.0
+WARM = np.array([0xE2, 0xC1, 0xA2], dtype=np.float32) / 255.0
 
 
 # ---------------------------------------------------------------- easing ----
@@ -117,15 +121,17 @@ def glow(w: int, h: int, cx: float, cy: float, rx: float, ry: float) -> np.ndarr
     return np.exp(-(r ** 2) * 1.6).astype(np.float32)[..., None]
 
 
-def paste(canvas: np.ndarray, layer: np.ndarray, x: int, y: int) -> None:
-    """Additive composite of an (h, w, 3) light layer at (x, y), clipped."""
+def over(canvas: np.ndarray, cov: np.ndarray, colour: np.ndarray,
+         x: int, y: int) -> None:
+    """Source-over composite of a coverage map in one colour, clipped."""
     H, W = canvas.shape[:2]
-    lh, lw = layer.shape[:2]
+    lh, lw = cov.shape[:2]
     x0, y0 = max(x, 0), max(y, 0)
     x1, y1 = min(x + lw, W), min(y + lh, H)
     if x1 <= x0 or y1 <= y0:
         return
-    canvas[y0:y1, x0:x1] += layer[y0 - y:y1 - y, x0 - x:x1 - x]
+    a = cov[y0 - y:y1 - y, x0 - x:x1 - x][..., None]
+    canvas[y0:y1, x0:x1] = canvas[y0:y1, x0:x1] * (1 - a) + colour * a
 
 
 # ------------------------------------------------------------------ render ---
@@ -135,22 +141,21 @@ def render(
     w: int,
     h: int,
     duration: float,
-    mark_frac: float,
+    mark_frac: float,  # share of frame HEIGHT the mark occupies
     centre: tuple[float, float],
     with_type: bool,
     fast: bool,
 ) -> None:
     mark = Image.open(BRAND / "logo-mark.png").convert("RGBA")
-    mark_w = max(int(w * mark_frac), 8)
+    mark_h = max(int(h * mark_frac), 8)
+    mark_w = max(round(mark.width * mark_h / mark.height), 8)
     alpha, dist = build_reveal(mark, mark_w)
     mh, mw = alpha.shape
 
     type_img = None
     if with_type:
-        lockup = Image.open(BRAND / "logo-lockup.png").convert("RGBA")
-        block = lockup.crop((0, 305, lockup.width, lockup.height))
-        block = block.crop(block.split()[3].getbbox())
-        tw = max(int(w * mark_frac * 1.18), 8)
+        block = Image.open(BRAND / "logo-type.png").convert("RGBA")
+        tw = max(round(mark_w * 1.55), 8)
         type_img = block.resize((tw, max(round(block.height * tw / block.width), 1)), Image.LANCZOS)
         type_a = np.asarray(type_img.split()[3], dtype=np.float32) / 255.0
 
@@ -180,7 +185,7 @@ def render(
             "-s", f"{w}x{h}", "-framerate", str(FPS),
             "-i", "pipe:0",
             "-c:v", "libx264", "-preset", "veryfast" if fast else "slow",
-            "-crf", "23" if fast else "21",
+            "-crf", "22" if fast else "20",
             "-pix_fmt", "yuv420p", "-movflags", "+faststart",
             str(out_path),
         ],
@@ -189,11 +194,12 @@ def render(
 
     for i in range(frames):
         t = i / FPS
-        canvas = np.tile(INK, (h, w, 1)).astype(np.float32)
+        canvas = np.tile(PAPER, (h, w, 1)).astype(np.float32)
 
-        # The room light breathes very slightly through the whole loop.
+        # A barely-there warm wash, breathing through the loop. On white it has
+        # to darken the frame, not light it.
         breathe = 0.5 + 0.5 * math.sin(2 * math.pi * t / duration - math.pi / 2)
-        canvas += ambient * (0.055 + 0.02 * breathe) * SAND
+        canvas -= ambient * (0.030 + 0.012 * breathe) * (1.0 - WARM)
 
         p = smoothstep(DRAW_A, DRAW_B, t)
         out_a = 1.0 - smoothstep(FADE_A, FADE_B, t)
@@ -203,14 +209,13 @@ def render(
             edge = 0.045
             drawn = np.clip((p - dist) / edge, 0.0, 1.0)
             lit = alpha * drawn * out_a
-            layer = lit[..., None] * BONE
+            over(canvas, lit, INK, mx, my)
 
-            # The pen tip: a brighter band riding the front of the stroke.
+            # The pen tip: on white the leading edge reads by going lighter and
+            # warmer than the laid ink, not by glowing.
             if p < 1.0:
                 tip = np.exp(-(((dist - p) / 0.03) ** 2))
-                layer += (alpha * tip * out_a * 0.85)[..., None] * SAND
-
-            paste(canvas, layer, mx, my)
+                over(canvas, alpha * tip * out_a * 0.9, WARM, mx, my)
 
         if type_img is not None:
             ta = smoothstep(TYPE_A, TYPE_B, t) * out_a
@@ -221,11 +226,12 @@ def render(
                      - np.linspace(0.0, 1.0, type_img.width, dtype=np.float32)[None, :]) / 0.22,
                     0.0, 1.0,
                 )
-                layer = (type_a * wipe * ta)[..., None] * BONE
-                paste(canvas, layer, int(w * centre[0] - type_img.width / 2), my + mh + gap)
+                over(canvas, type_a * wipe * ta, INK,
+                     int(w * centre[0] - type_img.width / 2), my + mh + gap)
 
-        canvas += dither
-        canvas *= smoothstep(0.0, 0.4, t)
+        canvas -= dither
+        # Fade in from the paper, not from black.
+        canvas = PAPER + (canvas - PAPER) * smoothstep(0.0, 0.4, t)
 
         proc.stdin.write((np.clip(canvas, 0, 1) * 255).astype(np.uint8).tobytes())
 
@@ -243,12 +249,12 @@ def main() -> None:
 
     # Hero backdrop: the mark only, held right of centre so the headline keeps
     # the left of the frame. Loops on black.
-    render(OUT / "hero-16x9.mp4", 1920 // d, 1080 // d, 10.0, 0.34, (0.66, 0.50), False, args.fast)
-    render(OUT / "hero-9x16.mp4", 1080 // d, 1920 // d, 10.0, 0.66, (0.50, 0.33), False, args.fast)
+    render(OUT / "hero-16x9.mp4", 1920 // d, 1080 // d, 10.0, 0.58, (0.66, 0.50), False, args.fast)
+    render(OUT / "hero-9x16.mp4", 1080 // d, 1920 // d, 10.0, 0.30, (0.50, 0.34), False, args.fast)
 
     # Standalone films, with the wordmark, for social.
-    render(OUT / "logo-16x9.mp4", 1920 // d, 1080 // d, 8.0, 0.22, (0.50, 0.46), True, args.fast)
-    render(OUT / "logo-9x16.mp4", 1080 // d, 1920 // d, 8.0, 0.46, (0.50, 0.44), True, args.fast)
+    render(OUT / "logo-16x9.mp4", 1920 // d, 1080 // d, 8.0, 0.44, (0.50, 0.42), True, args.fast)
+    render(OUT / "logo-9x16.mp4", 1080 // d, 1920 // d, 8.0, 0.26, (0.50, 0.40), True, args.fast)
 
 
 if __name__ == "__main__":

@@ -14,19 +14,19 @@ export default function PageHeader({
   lead?: string;
 }) {
   return (
-    <section className="bg-ink-950 pt-32 pb-10 sm:pt-44 sm:pb-20">
+    <section className="bg-paper pt-32 pb-10 sm:pt-44 sm:pb-20">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           {eyebrow ? (
-            <p className="mb-5 text-[11px] tracking-[0.2em] text-sand-500 uppercase">
+            <p className="mb-5 text-[11px] tracking-[0.2em] text-brand-600 uppercase">
               {eyebrow}
             </p>
           ) : null}
-          <h1 className="max-w-[20ch] font-display text-[clamp(2.4rem,6vw,4.25rem)] leading-[1.05] font-normal text-bone">
+          <h1 className="max-w-[20ch] font-display text-[clamp(2.4rem,6vw,4.25rem)] leading-[1.05] font-normal text-brand-900">
             {title}
           </h1>
           {lead ? (
-            <p className="mt-7 max-w-[52ch] text-[16px] leading-relaxed text-bone-dim sm:text-[18px]">
+            <p className="mt-7 max-w-[52ch] text-[16px] leading-relaxed text-brand-700 sm:text-[18px]">
               {lead}
             </p>
           ) : null}

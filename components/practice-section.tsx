@@ -9,7 +9,7 @@ import { contact, hours, images } from "@/lib/content";
  */
 export default function PracticeSection() {
   return (
-    <section className="bg-ink-900 py-14 sm:py-28">
+    <section className="bg-paper-warm py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-rows-2">
           <Reveal className="lg:col-span-2 lg:row-span-2">
@@ -25,31 +25,31 @@ export default function PracticeSection() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="flex h-full flex-col rounded-card bg-ink-850 p-8">
-              <Clock size={22} weight="light" className="text-sand-400" />
-              <h3 className="mt-5 font-display text-[22px] text-bone">Ωράριο</h3>
+            <div className="flex h-full flex-col rounded-card bg-paper-card p-8">
+              <Clock size={22} weight="light" className="text-brand-600" />
+              <h3 className="mt-5 font-display text-[22px] text-brand-900">Ωράριο</h3>
               <ul className="mt-6 space-y-3.5">
                 {hours.map((h) => (
                   <li
                     key={h.day}
                     className="flex items-baseline justify-between gap-4 text-[15px]"
                   >
-                    <span className="text-bone-dim">{h.day}</span>
-                    <span className="text-bone tabular-nums">{h.slots[0]}</span>
+                    <span className="text-brand-700">{h.day}</span>
+                    <span className="text-brand-900 tabular-nums">{h.slots[0]}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-bone-mute">
+              <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-brand-600">
                 Κάθε ραντεβού κρατά {contact.appointmentMinutes} λεπτά.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.16}>
-            <div className="flex h-full flex-col rounded-card bg-ink-850 p-8">
-              <MapPin size={22} weight="light" className="text-sand-400" />
-              <h3 className="mt-5 font-display text-[22px] text-bone">Διεύθυνση</h3>
-              <p className="mt-6 text-[15.5px] leading-relaxed text-bone-dim">
+            <div className="flex h-full flex-col rounded-card bg-paper-card p-8">
+              <MapPin size={22} weight="light" className="text-brand-600" />
+              <h3 className="mt-5 font-display text-[22px] text-brand-900">Διεύθυνση</h3>
+              <p className="mt-6 text-[15.5px] leading-relaxed text-brand-700">
                 {contact.address.street}
                 <br />
                 {contact.address.area}, {contact.address.city}
@@ -60,7 +60,7 @@ export default function PracticeSection() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto pt-8 text-[14px] font-medium text-sand-300 underline-offset-4 hover:underline"
+                className="mt-auto pt-8 text-[14px] font-medium text-brand-600 underline-offset-4 hover:underline"
               >
                 Άνοιγμα στους χάρτες
               </a>

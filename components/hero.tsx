@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100dvh] items-end overflow-hidden bg-ink-950 pb-16 sm:pb-20 lg:items-center lg:pb-0"
+      className="relative flex min-h-[100dvh] items-end overflow-hidden bg-paper pb-16 sm:pb-20 lg:items-center lg:pb-0"
     >
       <motion.div
         style={reduce ? undefined : { y, opacity: fade }}
@@ -69,8 +69,8 @@ export default function Hero() {
             className="h-full w-full object-cover object-[62%_center]"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/45 to-transparent lg:via-ink-950/18" />
-        <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-ink-950 via-ink-950/70 to-transparent lg:h-52 lg:via-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/55 to-transparent lg:via-paper/25" />
+        <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-paper via-paper/75 to-transparent lg:h-52 lg:via-transparent" />
       </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pt-24 sm:px-8">
@@ -79,7 +79,7 @@ export default function Hero() {
             initial={reduce ? false : { opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.9rem,8.2vw,6rem)] leading-[1.02] font-normal tracking-[-0.015em] text-bone"
+            className="font-display text-[clamp(2.9rem,8.2vw,6rem)] leading-[1.02] font-normal tracking-[-0.015em] text-brand-900"
           >
             {doctor.name}
           </motion.h1>
@@ -88,9 +88,9 @@ export default function Hero() {
             initial={reduce ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 max-w-[34rem] text-[15.5px] leading-relaxed text-bone-dim sm:text-[17px]"
+            className="mt-6 max-w-[34rem] text-[15.5px] leading-relaxed text-brand-700 sm:text-[17px]"
           >
-            <span className="text-bone">
+            <span className="text-brand-900">
               {doctor.specialty}, {doctor.subSpecialty}.
             </span>{" "}
             {doctor.tagline}.
@@ -104,13 +104,13 @@ export default function Hero() {
           >
             <a
               href={contact.phone.href}
-              className="rounded-full bg-sand-400 px-7 py-3.5 text-center text-[15px] font-semibold whitespace-nowrap text-ink-950 transition-all duration-200 hover:bg-sand-300 active:translate-y-[1px]"
+              className="rounded-full bg-brand-600 px-7 py-3.5 text-center text-[15px] font-semibold whitespace-nowrap text-white transition-all duration-200 hover:bg-brand-700 active:translate-y-[1px]"
             >
               Κλείστε ραντεβού
             </a>
             <a
               href="#ypiresies"
-              className="rounded-full border border-ink-700 px-7 py-3.5 text-center text-[15px] font-medium whitespace-nowrap text-bone transition-colors duration-200 hover:border-sand-500 hover:text-sand-300"
+              className="rounded-full border border-line-strong px-7 py-3.5 text-center text-[15px] font-medium whitespace-nowrap text-brand-900 transition-colors duration-200 hover:border-brand-500 hover:text-brand-800"
             >
               Οι υπηρεσίες
             </a>

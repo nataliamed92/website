@@ -23,21 +23,21 @@ export default function CrossLink({
   imageAlt: string;
 }) {
   return (
-    <section className="bg-ink-950 py-14 sm:py-28">
+    <section className="bg-paper py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <Reveal>
           <Link
             href={href}
-            className="group grid grid-cols-1 items-center gap-8 overflow-hidden rounded-card bg-ink-900 transition-colors duration-300 hover:bg-ink-850 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-0"
+            className="group grid grid-cols-1 items-center gap-8 overflow-hidden rounded-card bg-paper-warm transition-colors duration-300 hover:bg-paper-card md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-0"
           >
             <div className="order-2 p-8 sm:p-12 md:order-1">
-              <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-tight font-normal text-bone">
+              <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-tight font-normal text-brand-900">
                 {title}
               </h2>
-              <p className="mt-5 max-w-[46ch] text-[15.5px] leading-relaxed text-bone-dim">
+              <p className="mt-5 max-w-[46ch] text-[15.5px] leading-relaxed text-brand-700">
                 {body}
               </p>
-              <span className="mt-8 inline-flex items-center gap-2.5 text-[14.5px] font-medium text-sand-300">
+              <span className="mt-8 inline-flex items-center gap-2.5 text-[14.5px] font-medium text-brand-600">
                 {cta}
                 <ArrowRight
                   size={17}

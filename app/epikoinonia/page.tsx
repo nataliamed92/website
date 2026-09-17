@@ -37,13 +37,13 @@ export default function Page() {
       />
 
       {/* Layout family: two priority actions above a quiet detail column. */}
-      <section className="bg-ink-950 pb-14 sm:pb-28">
+      <section className="bg-paper pb-14 sm:pb-28">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Reveal>
               <a
                 href={contact.phone.href}
-                className="flex h-full flex-col justify-between gap-10 rounded-card bg-sand-400 p-8 text-ink-950 transition-colors duration-200 hover:bg-sand-300 sm:p-10"
+                className="flex h-full flex-col justify-between gap-10 rounded-card bg-brand-600 p-8 text-white transition-colors duration-200 hover:bg-brand-700 sm:p-10"
               >
                 <Phone size={24} weight="light" />
                 <div>
@@ -60,14 +60,14 @@ export default function Page() {
             <Reveal delay={0.08}>
               <a
                 href={`mailto:${contact.email}`}
-                className="flex h-full flex-col justify-between gap-10 rounded-card border border-ink-800 bg-ink-900 p-8 transition-colors duration-200 hover:border-sand-600 sm:p-10"
+                className="flex h-full flex-col justify-between gap-10 rounded-card border border-line bg-paper-warm p-8 transition-colors duration-200 hover:border-brand-500 sm:p-10"
               >
-                <EnvelopeSimple size={24} weight="light" className="text-sand-400" />
+                <EnvelopeSimple size={24} weight="light" className="text-brand-600" />
                 <div>
-                  <p className="text-[13px] font-semibold tracking-[0.14em] text-bone-mute uppercase">
+                  <p className="text-[13px] font-semibold tracking-[0.14em] text-brand-600 uppercase">
                     Email
                   </p>
-                  <p className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.9rem)] leading-tight break-all text-bone">
+                  <p className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.9rem)] leading-tight break-all text-brand-900">
                     {contact.email}
                   </p>
                 </div>
@@ -77,10 +77,10 @@ export default function Page() {
 
           <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
             <Reveal>
-              <div className="flex h-full flex-col rounded-card bg-ink-900 p-8">
-                <MapPin size={22} weight="light" className="text-sand-400" />
-                <h2 className="mt-5 font-display text-[22px] text-bone">Διεύθυνση</h2>
-                <p className="mt-5 text-[15.5px] leading-relaxed text-bone-dim">
+              <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
+                <MapPin size={22} weight="light" className="text-brand-600" />
+                <h2 className="mt-5 font-display text-[22px] text-brand-900">Διεύθυνση</h2>
+                <p className="mt-5 text-[15.5px] leading-relaxed text-brand-700">
                   {contact.address.street}
                   <br />
                   {contact.address.area}, {contact.address.city}
@@ -89,7 +89,7 @@ export default function Page() {
                   href={mapsHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto pt-8 text-[14px] font-medium text-sand-300 underline-offset-4 hover:underline"
+                  className="mt-auto pt-8 text-[14px] font-medium text-brand-600 underline-offset-4 hover:underline"
                 >
                   Άνοιγμα στους χάρτες
                 </a>
@@ -97,29 +97,29 @@ export default function Page() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <div className="flex h-full flex-col rounded-card bg-ink-900 p-8">
-                <Clock size={22} weight="light" className="text-sand-400" />
-                <h2 className="mt-5 font-display text-[22px] text-bone">Ωράριο</h2>
+              <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
+                <Clock size={22} weight="light" className="text-brand-600" />
+                <h2 className="mt-5 font-display text-[22px] text-brand-900">Ωράριο</h2>
                 <ul className="mt-5 space-y-3.5">
                   {hours.map((h) => (
                     <li
                       key={h.day}
                       className="flex items-baseline justify-between gap-4 text-[15px]"
                     >
-                      <span className="text-bone-dim">{h.day}</span>
-                      <span className="text-bone tabular-nums">{h.slots[0]}</span>
+                      <span className="text-brand-700">{h.day}</span>
+                      <span className="text-brand-900 tabular-nums">{h.slots[0]}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-bone-mute">
+                <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-brand-600">
                   Κάθε ραντεβού κρατά {contact.appointmentMinutes} λεπτά.
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.16}>
-              <div className="flex h-full flex-col rounded-card bg-ink-900 p-8">
-                <h2 className="font-display text-[22px] text-bone">Στα social</h2>
+              <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
+                <h2 className="font-display text-[22px] text-brand-900">Στα social</h2>
                 <ul className="mt-4 space-y-1">
                   {social.map((s) => {
                     const Icon = socialIcon[s.label as keyof typeof socialIcon];
@@ -129,7 +129,7 @@ export default function Page() {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex min-h-11 items-center gap-3 py-1.5 text-[15px] text-bone-dim transition-colors hover:text-sand-300"
+                          className="flex min-h-11 items-center gap-3 py-1.5 text-[15px] text-brand-700 transition-colors hover:text-brand-800"
                         >
                           <Icon size={20} weight="light" />
                           {s.handle}
@@ -150,9 +150,9 @@ export default function Page() {
           alt="Κεντρική λεωφόρος της Αθήνας το βράδυ, με φωτισμένα δέντρα και βρεγμένη άσφαλτο"
           fill
           sizes="100vw"
-          className="object-cover opacity-45"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-ink-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-paper/25 to-transparent" />
       </section>
     </>
   );

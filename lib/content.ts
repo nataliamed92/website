@@ -190,6 +190,9 @@ export const brand = {
   mark: "/brand/logo-mark.png",
   /** Thicker strokes, cropped to the head. For anything under ~48px. */
   markSmall: "/brand/logo-mark-sm.png",
+  /** Light cut, for the rare placement over a dark photograph. */
+  lockupOnDark: "/brand/logo-lockup-on-dark.png",
+  markOnDark: "/brand/logo-mark-on-dark.png",
 } as const;
 
 /**

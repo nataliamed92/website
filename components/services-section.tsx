@@ -18,7 +18,7 @@ export default function ServicesSection() {
   const current = services.find((s) => s.slug === active) ?? services[0];
 
   return (
-    <section className="bg-ink-900 py-14 sm:py-28">
+    <section className="bg-paper-warm py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="flex flex-wrap gap-2.5">
           {services.map((s) => {
@@ -31,8 +31,8 @@ export default function ServicesSection() {
                 aria-pressed={on}
                 className={`rounded-full border px-5 py-2.5 text-[14px] whitespace-nowrap transition-all duration-200 active:scale-[0.98] ${
                   on
-                    ? "border-sand-400 bg-sand-400 font-semibold text-ink-950"
-                    : "border-ink-700 text-bone-dim hover:border-sand-600 hover:text-bone"
+                    ? "border-brand-600 bg-brand-600 font-semibold text-white"
+                    : "border-line-strong text-brand-700 hover:border-brand-500 hover:text-brand-900"
                 }`}
               >
                 {s.title}
@@ -51,7 +51,7 @@ export default function ServicesSection() {
                 exit={reduce ? undefined : { opacity: 0, y: -8 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="max-w-[48ch] text-[16px] leading-relaxed text-bone-dim sm:text-[17.5px]">
+                <p className="max-w-[48ch] text-[16px] leading-relaxed text-brand-700 sm:text-[17.5px]">
                   {current.lead}
                 </p>
 
@@ -66,7 +66,7 @@ export default function ServicesSection() {
                         delay: 0.05 + i * 0.035,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="border-b border-ink-800 py-4 text-[15.5px] text-bone"
+                      className="border-b border-line py-4 text-[15.5px] text-brand-900"
                     >
                       {item}
                     </motion.li>
