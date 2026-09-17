@@ -58,9 +58,20 @@ export default function SiteFooter() {
         </div>
 
         <div className="rule-fade mt-12" />
-        <p className="mt-6 text-[12.5px] text-brand-600">
-          © {new Date().getFullYear()} {doctor.fullName}
-        </p>
+        <div className="mt-6 flex flex-col gap-3 text-[12.5px] text-brand-600 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {doctor.fullName}
+          </p>
+          <a
+            href="https://clinicbrain.gr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-2 text-brand-600 transition-colors hover:text-brand-800"
+          >
+            Made by <span className="tracking-[0.08em] text-brand-700">CLINICBRAIN</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </footer>
   );
