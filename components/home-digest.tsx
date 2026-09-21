@@ -68,13 +68,16 @@ export default function HomeDigest() {
                 href="/ypiresies"
                 className="group flex h-full flex-col overflow-hidden rounded-card bg-paper transition-colors duration-300 hover:bg-paper-card"
               >
+                {/* Wide letterbox over a near-square photo: a centred crop
+                    keeps the surgical cap and loses her face, so the focal
+                    point sits low. */}
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
                     src={images.surgery}
                     alt="Η Ναταλία Φούρλα στο χειρουργείο, σε χειρουργικό μικροσκόπιο"
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
-                    className="object-cover"
+                    className="object-cover object-[50%_62%]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-8 sm:p-10">
