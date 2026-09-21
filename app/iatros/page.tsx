@@ -23,6 +23,7 @@ export default function Page() {
         cta="Δείτε τις υπηρεσίες"
         image={images.candid}
         imageAlt="Η Ναταλία Φούρλα με ιατρική μπλούζα"
+        imagePosition="object-[30%_top]"
       />
       <ClosingCta />
     </>

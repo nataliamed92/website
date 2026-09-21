@@ -14,6 +14,12 @@ export default function CrossLink({
   cta,
   image,
   imageAlt,
+  /**
+   * Where `object-cover` should anchor. The card is a wide letterbox, so a
+   * portrait dropped in centred loses the top of the head; pass the focal
+   * point when the subject is not in the middle of the frame.
+   */
+  imagePosition = "object-center",
 }: {
   title: string;
   body: string;
@@ -21,6 +27,7 @@ export default function CrossLink({
   cta: string;
   image: string;
   imageAlt: string;
+  imagePosition?: string;
 }) {
   return (
     <section className="bg-paper py-14 sm:py-28">
@@ -52,7 +59,7 @@ export default function CrossLink({
                 alt={imageAlt}
                 fill
                 sizes="(max-width: 768px) 100vw, 48vw"
-                className="object-cover"
+                className={`object-cover ${imagePosition}`}
               />
             </div>
           </Link>
