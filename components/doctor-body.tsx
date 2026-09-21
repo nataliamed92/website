@@ -14,11 +14,11 @@ export default function DoctorBody() {
           <Reveal>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-card">
               <Image
-                src={images.coat}
-                alt="Χέρια χειρουργού με λευκή ιατρική μπλούζα και χειρουργικές μεγεθυντικές λούπες σε σκούρο τραπέζι"
+                src={images.portrait}
+                alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
+                className="object-cover object-[center_15%]"
               />
             </div>
           </Reveal>

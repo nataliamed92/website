@@ -25,11 +25,11 @@ export default function HomeDigest() {
           <Reveal>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-card">
               <Image
-                src={images.coat}
-                alt="Χέρια χειρουργού με λευκή ιατρική μπλούζα και χειρουργικές μεγεθυντικές λούπες σε σκούρο τραπέζι"
+                src={images.portrait}
+                alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
+                className="object-cover object-[center_15%]"
               />
             </div>
           </Reveal>
@@ -70,8 +70,8 @@ export default function HomeDigest() {
               >
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
-                    src={images.instruments}
-                    alt="Διαγνωστικά ωτορινολαρυγγολογικά εργαλεία σε σκούρα επιφάνεια"
+                    src={images.surgery}
+                    alt="Η Ναταλία Φούρλα στο χειρουργείο, σε χειρουργικό μικροσκόπιο"
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
                     className="object-cover"
