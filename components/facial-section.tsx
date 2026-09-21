@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useId, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "@/components/reveal";
 import { facialSurgery, images, medicalNote } from "@/lib/content";
@@ -66,49 +66,53 @@ export default function FacialSection() {
                       />
                     </button>
 
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          id={panelId}
-                          initial={reduce ? { opacity: 1 } : { height: 0, opacity: 0 }}
-                          animate={reduce ? { opacity: 1 } : { height: "auto", opacity: 1 }}
-                          exit={reduce ? { opacity: 1 } : { height: 0, opacity: 0 }}
-                          transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
-                          className="overflow-hidden"
-                        >
-                          <div className="max-w-[62ch] pb-9 sm:pl-[calc(14rem+2rem)]">
-                            <p className="text-[15px] leading-relaxed text-brand-700">
-                              {item.what}
-                            </p>
+                    {/* Never unmounted: a collapsed panel must still be in the
+                        HTML, or the description is invisible to a crawler. */}
+                    <motion.div
+                      id={panelId}
+                      initial={false}
+                      animate={{
+                        height: isOpen ? "auto" : 0,
+                        opacity: isOpen ? 1 : 0,
+                      }}
+                      transition={
+                        reduce
+                          ? { duration: 0 }
+                          : { duration: 0.34, ease: [0.16, 1, 0.3, 1] }
+                      }
+                      className="overflow-hidden"
+                    >
+                      <div className="max-w-[62ch] pb-9 sm:pl-[calc(14rem+2rem)]">
+                        <p className="text-[15px] leading-relaxed text-brand-700">
+                          {item.what}
+                        </p>
 
-                            <p className="mt-6 text-[11px] tracking-[0.16em] text-brand-600 uppercase">
-                              {item.list.label}
-                            </p>
-                            <ul className="mt-3 space-y-2">
-                              {item.list.items.map((line) => (
-                                <li
-                                  key={line}
-                                  className="flex gap-3 text-[14.5px] leading-relaxed text-brand-800"
-                                >
-                                  <span
-                                    aria-hidden
-                                    className="mt-[0.62em] h-[3px] w-[3px] shrink-0 rounded-full bg-brand-600"
-                                  />
-                                  {line}
-                                </li>
-                              ))}
-                            </ul>
+                        <p className="mt-6 text-[11px] tracking-[0.16em] text-brand-600 uppercase">
+                          {item.list.label}
+                        </p>
+                        <ul className="mt-3 space-y-2">
+                          {item.list.items.map((line) => (
+                            <li
+                              key={line}
+                              className="flex gap-3 text-[14.5px] leading-relaxed text-brand-800"
+                            >
+                              <span
+                                aria-hidden
+                                className="mt-[0.62em] h-[3px] w-[3px] shrink-0 rounded-full bg-brand-600"
+                              />
+                              {line}
+                            </li>
+                          ))}
+                        </ul>
 
-                            <p className="mt-6 text-[11px] tracking-[0.16em] text-brand-600 uppercase">
-                              {item.close.label}
-                            </p>
-                            <p className="mt-3 text-[15px] leading-relaxed text-brand-700">
-                              {item.close.body}
-                            </p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                        <p className="mt-6 text-[11px] tracking-[0.16em] text-brand-600 uppercase">
+                          {item.close.label}
+                        </p>
+                        <p className="mt-3 text-[15px] leading-relaxed text-brand-700">
+                          {item.close.body}
+                        </p>
+                      </div>
+                    </motion.div>
                   </li>
                 </Reveal>
               );
