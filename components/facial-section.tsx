@@ -50,8 +50,21 @@ export default function FacialSection() {
                       aria-controls={panelId}
                       className="grid w-full grid-cols-1 gap-1.5 py-7 text-left sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto] sm:items-baseline sm:gap-8 sm:py-8"
                     >
-                      <span className="font-display text-[21px] leading-snug text-brand-900">
-                        {item.name}
+                      {/* Below sm the three columns stack, so the marker has to
+                          ride with the name — otherwise the phone shows a row
+                          with no sign at all that it opens. */}
+                      <span className="flex items-center justify-between gap-4 sm:block">
+                        <span className="font-display text-[21px] leading-snug text-brand-900">
+                          {item.name}
+                        </span>
+                        <Plus
+                          size={18}
+                          weight="light"
+                          aria-hidden
+                          className={`shrink-0 text-brand-600 transition-transform duration-300 sm:hidden ${
+                            isOpen ? "rotate-45" : ""
+                          }`}
+                        />
                       </span>
                       <span className="text-[15px] leading-relaxed text-brand-700">
                         {item.note}
