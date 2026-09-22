@@ -75,11 +75,15 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-5 pt-24 sm:px-8">
         <div className="max-w-[46rem]">
+          {/* The logo's lettering, at hero scale: uppercase, light, widely
+              tracked. Caps plus tracking are far wider than the serif they
+              replaced, so the floor drops and tracking closes up on phones —
+              type clipped inside its own box is invisible to the overflow audit. */}
           <motion.h1
             initial={reduce ? false : { opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.9rem,8.2vw,6rem)] leading-[1.02] font-normal tracking-[-0.015em] text-brand-900"
+            className="text-[clamp(1.9rem,6.4vw,4.25rem)] leading-[1.18] font-light tracking-[0.1em] break-words text-brand-900 uppercase sm:tracking-[0.18em]"
           >
             {doctor.name}
           </motion.h1>
