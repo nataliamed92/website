@@ -27,7 +27,7 @@ export default function DoctorBody() {
         <div>
           <Reveal>
             <h2 className="font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900">
-              Εκπαίδευση και εξειδικεύσεις
+              Εκπαίδευση και μετεκπαιδεύσεις
             </h2>
           </Reveal>
 

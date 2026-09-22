@@ -26,11 +26,11 @@ export default function FacialSection() {
         <Reveal>
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card lg:sticky lg:top-28">
             <Image
-              src={images.profile}
-              alt="Μελέτη προσώπου σε πλάγιο φωτισμό"
+              src={images.portrait}
+              alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover object-[45%_center]"
+              className="object-cover object-[center_15%]"
             />
           </div>
         </Reveal>

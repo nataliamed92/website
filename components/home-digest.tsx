@@ -38,9 +38,14 @@ export default function HomeDigest() {
             <p className="text-[11px] tracking-[0.2em] text-brand-600 uppercase">
               Η ιατρός
             </p>
-            <h2 className="mt-5 font-display text-[clamp(2rem,4.6vw,3.25rem)] leading-[1.1] font-normal text-brand-900">
-              {doctor.fullName}
+            {/* Her name again, so it takes the same logo lettering as the page
+                title on /iatros — the one string that must not read two ways. */}
+            <h2 className="mt-5 text-[clamp(1.5rem,3.4vw,2.35rem)] leading-[1.25] font-light tracking-[0.1em] text-brand-900 uppercase sm:tracking-[0.13em]">
+              {doctor.name}
             </h2>
+            <p className="mt-3.5 text-[15px] text-brand-600">
+              {doctor.credentials} · {doctor.specialty}
+            </p>
             <p className="mt-6 max-w-[48ch] text-[15.5px] leading-relaxed text-brand-700 sm:text-[16.5px]">
               {doctor.bio}
             </p>
@@ -48,7 +53,7 @@ export default function HomeDigest() {
               href="/iatros"
               className="group mt-7 inline-flex min-h-11 items-center gap-2.5 py-2 text-[14.5px] font-medium text-brand-600"
             >
-              Εκπαίδευση και εξειδικεύσεις
+              Εκπαίδευση και μετεκπαιδεύσεις
               <ArrowRight
                 size={17}
                 weight="light"
@@ -85,7 +90,7 @@ export default function HomeDigest() {
                     Υπηρεσίες ΩΡΛ
                   </h2>
                   <p className="mt-4 text-[15.5px] leading-relaxed text-brand-700">
-                    Μύτη, αυτί, λαιμός και τράχηλος, παιδο-ΩΡΛ, με τον διαγνωστικό
+                    Μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, παιδο-ΩΡΛ, με τον διαγνωστικό
                     έλεγχο να ολοκληρώνεται στο ιατρείο.
                   </p>
                   <p className="mt-6 text-[13.5px] text-brand-600">
@@ -110,11 +115,11 @@ export default function HomeDigest() {
               >
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
-                    src={images.profile}
-                    alt="Μελέτη προσώπου σε πλάγιο φωτισμό, σε μαύρο φόντο"
+                    src={images.candid}
+                    alt="Η Ναταλία Φούρλα με ιατρική μπλούζα"
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
-                    className="object-cover object-[50%_25%]"
+                    className="object-cover object-[30%_top]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-8 sm:p-10">

@@ -33,7 +33,7 @@ export const doctor = {
   specialty: "Ωτορινολαρυγγολόγος",
   subSpecialty: "Πλαστική Χειρουργική Προσώπου",
   tagline: "Με γνώση και σεβασμό για τον άνθρωπο-ασθενή",
-  bio: "Ειδικευμένη στη Χειρουργική ΩΡΛ και στη Χειρουργική Κεφαλής και Τραχήλου στο μεγαλύτερο νοσοκομείο της χώρας, το ΓΝΑ «Ευαγγελισμός». Μεταπτυχιακό στη Χειρουργική Ανατομία στο ΕΚΠΑ, με εξειδικεύσεις στην Ενδοσκοπική Χειρουργική Ρινός και στην Πλαστική Χειρουργική Προσώπου.",
+  bio: "Ειδικευμένη στη Χειρουργική ΩΡΛ και στη Χειρουργική Κεφαλής και Τραχήλου στο μεγαλύτερο νοσοκομείο της χώρας, το ΓΝΑ «Ευαγγελισμός». Μεταπτυχιακό στη Χειρουργική Ανατομία στο ΕΚΠΑ, με μετεκπαιδεύσεις στην Ενδοσκοπική Χειρουργική Ρινός και στην Πλαστική Χειρουργική Προσώπου.",
 } as const;
 
 /** Training milestones, drawn strictly from the bio above. */
@@ -50,12 +50,12 @@ export const credentials = [
   },
   {
     title: "Ενδοσκοπική Χειρουργική Ρινός",
-    place: "Εξειδίκευση",
+    place: "Μετεκπαίδευση",
     note: "Επεμβάσεις ρινός και παραρρινίων χωρίς εξωτερικές τομές.",
   },
   {
     title: "Πλαστική Χειρουργική Προσώπου",
-    place: "Εξειδίκευση",
+    place: "Μετεκπαίδευση",
     note: "Λειτουργική και αισθητική αποκατάσταση στο ίδιο χέρι.",
   },
 ] as const;
@@ -416,7 +416,7 @@ export const services: Service[] = [
   },
   {
     slug: "traxilos",
-    title: "Λαιμός και τράχηλος",
+    title: "Φάρυγγας, λάρυγγας και τράχηλος",
     lead: "Φωνή, κατάποση και τραχηλικές διογκώσεις σε έναν έλεγχο.",
     items: [
       {
@@ -653,6 +653,111 @@ export const facialSurgery = {
 export const medicalNote =
   "Οι πληροφορίες αυτής της σελίδας είναι γενικές και ενημερωτικές. Δεν υποκαθιστούν την ιατρική εξέταση, τη διάγνωση ή την εξατομικευμένη συμβουλή.";
 
+/**
+ * Added 2026-09-22 at the doctor's request, transcribed from her own CV
+ * («ΒΙΟΓΡΑΦΙΚΟ ΣΗΜΕΙΩΜΑ»). Nothing here is summarised or embellished: where the
+ * CV gives no year, none is printed rather than guessed.
+ */
+export const publications = [
+  {
+    title:
+      "Recurrent Nasal Polyposis and Bifid Epiglottis in a Child with Bardet–Biedl Syndrome Ciliopathy",
+    authors: "Natalia Fourla et al.",
+    journal: "Sinusitis, 2024, 8, 63–67",
+    doi: "10.3390/sinusitis8020008",
+  },
+  {
+    title: "Unilateral aural atresia: a case report",
+    authors: "Natalia Fourla et al.",
+    journal: "Journal of Surgical Case Reports, 2022, 2, 1–3",
+    doi: "10.1093/jscr/rjac037",
+  },
+  {
+    title:
+      "Chiari Malformation Type 1: An Appraisal of Operative Techniques and Outcomes",
+    authors: "Natalia Fourla et al.",
+    journal: "Medical Reports & Case Studies, Vol. 7, Issue 5, 001–005",
+    doi: null,
+  },
+  {
+    title:
+      "Agenesis of the coeliac trunk: a case report and review of the literature",
+    authors:
+      "M. Karamanidi, D. Chrysikos, A. Samolis, V. Protogerou, N. Fourla, I. Michalis, G. Papaioannou, T. Troupis",
+    journal: "Folia Morphologica, Vol. 80, No. 3, 718–721",
+    doi: "10.5603/FM.a2020.0093",
+  },
+  {
+    title:
+      "Emphysematous pyelonephritis triggers diabetic ketoacidosis in a 60 years old patient",
+    authors: "Gerasimos Kapellos, Natalia Fourla, Vlassios Polychronopoulos",
+    journal: "Journal of Nephrology and Therapeutics, 2018, 8:3",
+    doi: null,
+  },
+  {
+    title:
+      "17 years old patient with nephritic syndrome induced by systemic lupus erythematosus",
+    authors: "Natalia Fourla et al.",
+    journal: "Journal of Nephrology and Therapeutics, 2018, 8:3",
+    doi: "10.4172/2161-0959.1000311",
+  },
+] as const;
+
+/**
+ * Training, congresses and clinical attachments outside Greece, newest first.
+ * `note` carries the one fact that makes the entry worth reading.
+ */
+export const international = [
+  {
+    year: "Ιανουάριος 2026",
+    title: "Clinical attachment στη Χειρουργική Κεφαλής και Τραχήλου",
+    place: "Sant'Anna Hospital, Como, Ιταλία",
+    note: "Τμήμα Ωτορινολαρυγγολογίας, υπό τον Prof. P. Battaglia.",
+  },
+  {
+    year: "Δεκέμβριος 2025",
+    title: "Εθελόντρια ιατρός",
+    place: "Αποστολή Flying Doctors",
+    note: null,
+  },
+  {
+    year: "2024",
+    title: "EAFPS Istanbul",
+    place: "Κωνσταντινούπολη, Τουρκία",
+    note: "Ομιλία για επεμβάσεις θηλυκοποίησης προσώπου.",
+  },
+  {
+    year: "2024",
+    title: "1st RHINOEDU course in FESS and Skull Base Surgery",
+    place: "Lake Como, Ιταλία",
+    note: "Ενδοσκοπική χειρουργική παραρρινίων και βάσης κρανίου.",
+  },
+  {
+    year: "2023",
+    title: "EAFPS Verona",
+    place: "Βερόνα, Ιταλία",
+    note: "Ομιλία για επεμβάσεις θηλυκοποίησης προσώπου.",
+  },
+  {
+    year: "2022",
+    title: "ICOPLAST World Congress of Plastic Surgery Societies",
+    place: "Λίμα, Περού",
+    note: "Προφορική ανακοίνωση «Laryngeal cartilage reduction in transgender patients, our experience». Η εργασία βραβεύτηκε.",
+  },
+  {
+    year: "2020",
+    title: "IFFPS World Congress of Facial Plastic Surgery",
+    place: "Ταϊπέι, Ταϊβάν",
+    note: null,
+  },
+  {
+    year: "Οκτώβριος 2018",
+    title: "Clinical attachment σε Palliative care και Family medicine",
+    place: "Ellis Medical Center, Schenectady, New York, ΗΠΑ",
+    note: null,
+  },
+] as const;
+
 export const contact = {
   phone: { display: "697 088 2795", href: "tel:+306970882795" },
   email: "natalyfourla@gmail.com",
@@ -709,16 +814,15 @@ export const video = {
  * frame; `candid` was cropped to remove a third party's watermark and is low
  * resolution, so it is only ever used small.
  *
- * The rest is generated atmospheric photography and depicts no real room, no
- * real patient and no real result. Replace same-named files as real ones arrive.
+ * The generated face studies were deleted on 2026-09-22 at the client's
+ * request: no invented face may stand in for her work. What remains generated
+ * is `room` and `avenue`, which are places rather than people, and which she
+ * explicitly kept. Replace them too as real ones arrive.
  */
 export const images = {
   portrait: "/img/portrait.jpg",
   surgery: "/img/surgery.jpg",
   candid: "/img/clinic-candid.jpg",
-  instruments: "/img/instruments.jpg",
-  profile: "/img/profile-study.jpg",
   room: "/img/consultation-room.jpg",
   avenue: "/img/athens-avenue.jpg",
-  coat: "/img/white-coat.jpg",
 } as const;

@@ -8,7 +8,7 @@ import { facialSurgery, images } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Υπηρεσίες ΩΡΛ",
   description:
-    "Διαγνωστικές εξετάσεις, παθήσεις μύτης, αυτιού, λαιμού και τραχήλου, και παιδο-ΩΡΛ. Ακοόγραμμα, τυμπανόγραμμα, ενδοσκόπηση ρινός και λάρυγγα στο ιατρείο.",
+    "Διαγνωστικές εξετάσεις, παθήσεις μύτης, αυτιού, φάρυγγα, λάρυγγα και τραχήλου, και παιδο-ΩΡΛ. Ακοόγραμμα, τυμπανόγραμμα, ενδοσκόπηση ρινός και λάρυγγα στο ιατρείο.",
   alternates: { canonical: "/ypiresies" },
 };
 
@@ -26,8 +26,9 @@ export default function Page() {
         body={facialSurgery.lead}
         href="/prosopo"
         cta="Δείτε τις επεμβάσεις"
-        image={images.profile}
-        imageAlt="Μελέτη προσώπου σε πλάγιο φωτισμό, σε μαύρο φόντο"
+        image={images.portrait}
+        imageAlt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
+        imagePosition="object-[center_15%]"
       />
       <ClosingCta />
     </>
