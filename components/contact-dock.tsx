@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { Phone } from "@phosphor-icons/react";
-import { contact } from "@/lib/content";
 
 /**
  * Phone is the only booking channel the practice gave, so it stays one tap away
@@ -15,7 +14,13 @@ import { contact } from "@/lib/content";
  *    carries the phone number. Floating on top of a real button is worse than
  *    not being there.
  */
-export default function ContactDock() {
+export default function ContactDock({
+  phoneHref,
+  label,
+}: {
+  phoneHref: string;
+  label: string;
+}) {
   const [pastHero, setPastHero] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const pathname = usePathname();
@@ -46,8 +51,8 @@ export default function ContactDock() {
 
   return (
     <a
-      href={contact.phone.href}
-      aria-label={`Τηλεφωνήστε στο ${contact.phone.display}`}
+      href={phoneHref}
+      aria-label={label}
       aria-hidden={!shown}
       tabIndex={shown ? 0 : -1}
       className={`fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 text-white shadow-[0_12px_32px_-8px_rgba(55,37,18,0.45)] transition-all duration-300 active:scale-[0.96] lg:hidden ${

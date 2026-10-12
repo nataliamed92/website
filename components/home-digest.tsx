@@ -2,21 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock, MapPin } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "@/components/reveal";
-import {
-  contact,
-  doctor,
-  facialSurgery,
-  hours,
-  images,
-  services,
-} from "@/lib/content";
+import { getContent, pages, type Lang } from "@/lib/i18n";
 
 /**
  * The home page is a digest, not a copy of the site. Each block says just
  * enough to place the practice and then hands off to the page that holds the
  * full content, so nothing is written twice.
  */
-export default function HomeDigest() {
+export default function HomeDigest({ lang }: { lang: Lang }) {
+  const { contact, doctor, facialSurgery, hours, images, services, ui } = getContent(lang);
   return (
     <>
       {/* Layout family: sticky split. */}
@@ -26,7 +20,7 @@ export default function HomeDigest() {
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-card">
               <Image
                 src={images.portrait}
-                alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
+                alt={ui.alt.portrait}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-[center_15%]"
@@ -36,7 +30,7 @@ export default function HomeDigest() {
 
           <Reveal delay={0.08}>
             <p className="text-[11px] tracking-[0.2em] text-brand-600 uppercase">
-              Η ιατρός
+              {ui.homeDoctorEyebrow}
             </p>
             {/* Her name again, so it takes the same logo lettering as the page
                 title on /iatros — the one string that must not read two ways. */}
@@ -50,10 +44,10 @@ export default function HomeDigest() {
               {doctor.bio}
             </p>
             <Link
-              href="/iatros"
+              href={pages.doctor[lang]}
               className="group mt-7 inline-flex min-h-11 items-center gap-2.5 py-2 text-[14.5px] font-medium text-brand-600"
             >
-              Εκπαίδευση και μετεκπαιδεύσεις
+              {ui.educationTitle}
               <ArrowRight
                 size={17}
                 weight="light"
@@ -70,7 +64,7 @@ export default function HomeDigest() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Reveal>
               <Link
-                href="/ypiresies"
+                href={pages.services[lang]}
                 className="group flex h-full flex-col overflow-hidden rounded-card bg-paper transition-colors duration-300 hover:bg-paper-card"
               >
                 {/* Wide letterbox over a near-square photo: a centred crop
@@ -79,7 +73,7 @@ export default function HomeDigest() {
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
                     src={images.surgery}
-                    alt="Η Ναταλία Φούρλα στο χειρουργείο, σε χειρουργικό μικροσκόπιο"
+                    alt={ui.alt.surgery}
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
                     className="object-cover object-[50%_62%]"
@@ -87,17 +81,16 @@ export default function HomeDigest() {
                 </div>
                 <div className="flex flex-1 flex-col p-8 sm:p-10">
                   <h2 className="font-display text-[clamp(1.6rem,3vw,2.2rem)] leading-tight font-normal text-brand-900">
-                    Υπηρεσίες ΩΡΛ
+                    {ui.servicesTitle}
                   </h2>
                   <p className="mt-4 text-[15.5px] leading-relaxed text-brand-700">
-                    Μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, παιδο-ΩΡΛ, με τον διαγνωστικό
-                    έλεγχο να ολοκληρώνεται στο ιατρείο.
+                    {ui.homeServicesBody}
                   </p>
                   <p className="mt-6 text-[13.5px] text-brand-600">
                     {services.map((s) => s.title).join(" · ")}
                   </p>
                   <span className="mt-auto inline-flex items-center gap-2.5 pt-8 text-[14.5px] font-medium text-brand-600">
-                    Δείτε τις υπηρεσίες
+                    {ui.seeServices}
                     <ArrowRight
                       size={17}
                       weight="light"
@@ -110,13 +103,13 @@ export default function HomeDigest() {
 
             <Reveal delay={0.08}>
               <Link
-                href="/prosopo"
+                href={pages.facial[lang]}
                 className="group flex h-full flex-col overflow-hidden rounded-card bg-paper transition-colors duration-300 hover:bg-paper-card"
               >
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
                     src={images.operating}
-                    alt="Η Ναταλία Φούρλα στο χειρουργείο, με χειρουργική στολή και μάσκα"
+                    alt={ui.alt.operating}
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
                     className="object-cover object-[37%_26%]"
@@ -133,7 +126,7 @@ export default function HomeDigest() {
                     {facialSurgery.items.map((i) => i.name).join(" · ")}
                   </p>
                   <span className="mt-auto inline-flex items-center gap-2.5 pt-8 text-[14.5px] font-medium text-brand-600">
-                    Δείτε τις επεμβάσεις
+                    {ui.seeProcedures}
                     <ArrowRight
                       size={17}
                       weight="light"
@@ -154,7 +147,7 @@ export default function HomeDigest() {
             <div className="relative h-64 w-full overflow-hidden rounded-card sm:h-96 lg:h-[30rem]">
               <Image
                 src={images.room}
-                alt="Ήσυχος χώρος εξέτασης με φυσικό φως, μια πολυθρόνα και ξύλινο τραπεζάκι"
+                alt={ui.alt.room}
                 fill
                 sizes="100vw"
                 className="object-cover"
@@ -165,13 +158,13 @@ export default function HomeDigest() {
           <Reveal delay={0.08}>
             <div className="relative z-10 mx-auto -mt-12 w-full rounded-card border border-line bg-paper p-8 shadow-[0_24px_60px_-30px_rgba(55,37,18,0.30)] sm:-mt-20 sm:p-12 lg:ml-0 lg:max-w-[46rem]">
               <h2 className="font-display text-[clamp(1.8rem,4vw,2.75rem)] leading-[1.1] font-normal text-brand-900">
-                Το ιατρείο
+                {ui.homePracticeTitle}
               </h2>
               <dl className="mt-9 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-12">
                 <div>
                   <dt className="flex items-center gap-2.5 text-[13px] tracking-[0.14em] text-brand-600 uppercase">
                     <MapPin size={16} weight="light" />
-                    Διεύθυνση
+                    {ui.address}
                   </dt>
                   <dd className="mt-4 text-[16px] leading-relaxed text-brand-800">
                     {contact.address.street}
@@ -182,7 +175,7 @@ export default function HomeDigest() {
                 <div>
                   <dt className="flex items-center gap-2.5 text-[13px] tracking-[0.14em] text-brand-600 uppercase">
                     <Clock size={16} weight="light" />
-                    Ωράριο
+                    {ui.hours}
                   </dt>
                   <dd className="mt-4 space-y-2">
                     {hours.map((h) => (
@@ -198,10 +191,10 @@ export default function HomeDigest() {
                 </div>
               </dl>
               <Link
-                href="/iatreio"
+                href={pages.practice[lang]}
                 className="group mt-10 inline-flex min-h-11 items-center gap-2.5 py-2 text-[14.5px] font-medium text-brand-600 hover:text-brand-800"
               >
-                Δείτε τον χώρο
+                {ui.seeSpace}
                 <ArrowRight
                   size={17}
                   weight="light"

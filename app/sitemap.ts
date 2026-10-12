@@ -1,12 +1,17 @@
 import type { MetadataRoute } from "next";
-import { nav, siteUrl } from "@/lib/content";
+import { siteUrl } from "@/lib/content";
+import { pages } from "@/lib/routes";
 
+/** Both languages, each entry naming its counterpart for hreflang. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["/", ...nav.map((n) => n.href)];
-  return routes.map((route) => ({
-    url: `${siteUrl}${route === "/" ? "" : route}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "/" ? 1 : 0.8,
-  }));
+  const abs = (path: string) => `${siteUrl}${path === "/" ? "" : path}`;
+  return Object.values(pages).flatMap((page) =>
+    (["el", "en"] as const).map((lang) => ({
+      url: abs(page[lang]),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: page.el === "/" ? 1 : 0.8,
+      alternates: { languages: { el: abs(page.el), en: abs(page.en) } },
+    })),
+  );
 }

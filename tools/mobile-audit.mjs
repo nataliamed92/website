@@ -7,7 +7,11 @@ import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const [base, W = '390', H = '844', outDir] = process.argv.slice(2);
-const ROUTES = ['/', '/iatros', '/ypiresies', '/prosopo', '/iatreio', '/epikoinonia'];
+// Both languages. Keep in step with lib/routes.ts.
+const ROUTES = [
+  '/', '/iatros', '/ypiresies', '/prosopo', '/iatreio', '/epikoinonia',
+  '/en', '/en/doctor', '/en/services', '/en/facial-surgery', '/en/practice', '/en/contact',
+];
 const port = 9800 + Math.floor(Math.random() * 400);
 
 const chrome = spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',

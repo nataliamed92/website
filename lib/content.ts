@@ -81,17 +81,17 @@ export const credentials = [
  * examination has no symptoms and a condition has no procedure time.
  */
 export type Detail = {
-  name: string;
-  what: string;
-  list?: { label: string; items: string[] };
-  close: { label: string; body: string };
+  readonly name: string;
+  readonly what: string;
+  readonly list?: { readonly label: string; readonly items: readonly string[] };
+  readonly close: { readonly label: string; readonly body: string };
 };
 
 export type Service = {
-  slug: string;
-  title: string;
-  lead: string;
-  items: Detail[];
+  readonly slug: string;
+  readonly title: string;
+  readonly lead: string;
+  readonly items: readonly Detail[];
 };
 
 /**
@@ -808,47 +808,119 @@ export const social = [
   { label: "TikTok", handle: "@drnatalyfourla", href: "https://www.tiktok.com/@drnatalyfourla" },
 ] as const;
 
-export const brand = {
-  /** Chosen from the client's six-concept sheet: white line art on dark. */
-  lockup: "/brand/logo-lockup.png",
-  mark: "/brand/logo-mark.png",
-  /** Thicker strokes, cropped to the head. For anything under ~48px. */
-  markSmall: "/brand/logo-mark-sm.png",
-  /** Light cut, for the rare placement over a dark photograph. */
-  lockupOnDark: "/brand/logo-lockup-on-dark.png",
-  markOnDark: "/brand/logo-mark-on-dark.png",
-} as const;
+/**
+ * Photographs, films and logo files carry no language, so they live in
+ * `assets.ts`, which client components can import without pulling this
+ * file's text into the browser bundle.
+ */
+export { brand, video, images } from "./assets";
 
 /**
- * The hero film: the logo drawing itself on black. Rendered by
- * `tools/make-logo-video.py`, which is deterministic, so re-running it
- * reproduces these files exactly.
+ * Every piece of interface copy that is not a business fact: buttons, page
+ * headers, metadata, image descriptions. It used to be scattered through the
+ * components; it lives here since the site went bilingual (2026-10-12), so
+ * `content.en.ts` can mirror it key for key and nothing on a page is left in
+ * the other language by accident.
  */
-export const video = {
-  heroLandscape: "/video/hero-16x9.mp4",
-  heroPortrait: "/video/hero-9x16.mp4",
-  poster: "/video/hero-poster.jpg",
-  /** Standalone films with the wordmark, for Instagram and TikTok. */
-  filmLandscape: "/video/logo-16x9.mp4",
-  filmPortrait: "/video/logo-9x16.mp4",
-} as const;
-
-/**
- * `portrait`, `surgery` and `operating` are REAL photographs supplied by the
- * practice. `surgery` was cropped so that no patient appears in frame.
- * `operating` arrived on 2026-10-12 and replaced the selfie that used to sit
- * in its place, at the doctor's request; it is full resolution, so unlike the
- * selfie it is no longer restricted to small cards.
- *
- * The generated face studies were deleted on 2026-09-22 at the client's
- * request: no invented face may stand in for her work. What remains generated
- * is `room` and `avenue`, which are places rather than people, and which she
- * explicitly kept. Replace them too as real ones arrive.
- */
-export const images = {
-  portrait: "/img/portrait.jpg",
-  surgery: "/img/surgery.jpg",
-  operating: "/img/operating.jpg",
-  room: "/img/consultation-room.jpg",
-  avenue: "/img/athens-avenue.jpg",
-} as const;
+export const ui = {
+  htmlLang: "el",
+  ogLocale: "el_GR",
+  skipLink: "Μετάβαση στο περιεχόμενο",
+  book: "Κλείστε ραντεβού",
+  menuOpen: "Άνοιγμα μενού",
+  menuClose: "Κλείσιμο μενού",
+  /** The switch shows the language it leads TO, in that language. */
+  switchLabel: "EN",
+  switchAria: "English version",
+  callAria: "Τηλεφωνήστε στο",
+  home: "Αρχική",
+  email: "Email",
+  phone: "Τηλέφωνο",
+  address: "Διεύθυνση",
+  hours: "Ωράριο",
+  social: "Στα social",
+  openMaps: "Άνοιγμα στους χάρτες",
+  appointmentLength: (minutes: number) => `Κάθε ραντεβού κρατά ${minutes} λεπτά.`,
+  seeServices: "Δείτε τις υπηρεσίες",
+  seeProcedures: "Δείτε τις επεμβάσεις",
+  seeSpace: "Δείτε τον χώρο",
+  servicesShort: "Οι υπηρεσίες",
+  servicesTitle: "Υπηρεσίες ΩΡΛ",
+  educationTitle: "Εκπαίδευση και μετεκπαιδεύσεις",
+  membershipsTitle: "Μέλος επιστημονικών εταιρειών",
+  internationalTitle: "Διεθνής δραστηριότητα",
+  internationalLead: "Μετεκπαιδεύσεις, συνέδρια και συνεργασίες με κέντρα του εξωτερικού.",
+  publicationsTitle: "Δημοσιεύσεις",
+  publicationsLead: "Επιστημονικό έργο σε διεθνή περιοδικά με κριτές.",
+  closingTitle: "Κλείστε ραντεβού",
+  closingBody: "Τηλεφωνικά ή με email, για ραντεβού στο ιατρείο στη Λεωφόρο Βασιλίσσης Σοφίας.",
+  homeDoctorEyebrow: "Η ιατρός",
+  homeServicesBody: "Μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, παιδο-ΩΡΛ, με τον διαγνωστικό έλεγχο να ολοκληρώνεται στο ιατρείο.",
+  homePracticeTitle: "Το ιατρείο",
+  alt: {
+    portrait: "Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο",
+    surgery: "Η Ναταλία Φούρλα στο χειρουργείο, σε χειρουργικό μικροσκόπιο",
+    operating: "Η Ναταλία Φούρλα στο χειρουργείο, με χειρουργική στολή και μάσκα",
+    room: "Ήσυχος χώρος εξέτασης με φυσικό φως, μια πολυθρόνα και ξύλινο τραπεζάκι",
+    avenue: "Κεντρική λεωφόρος της Αθήνας το βράδυ, με φωτισμένα δέντρα και βρεγμένη άσφαλτο",
+  },
+  notFound: {
+    title: "Η σελίδα δεν βρέθηκε",
+    body: "Ο σύνδεσμος που ακολουθήσατε δεν οδηγεί κάπου. Δοκιμάστε από εδώ.",
+  },
+  meta: {
+    titleDefault: "Ναταλία Φούρλα MD, MSc · Χειρουργός Ωτορινολαρυγγολόγος στην Αθήνα",
+    description:
+      "Χειρουργός Ωτορινολαρυγγολόγος και Πλαστική Χειρουργική Προσώπου στην Αθήνα, Λεωφόρος Βασιλίσσης Σοφίας 50. Διαγνωστικές εξετάσεις, παθήσεις μύτης, αυτιού και τραχήλου, παιδο-ΩΡΛ, ρινοπλαστική και βλεφαροπλαστική.",
+    keywords: [
+      "ωτορινολαρυγγολόγος Αθήνα",
+      "ΩΡΛ Βασιλίσσης Σοφίας",
+      "πλαστική χειρουργική προσώπου",
+      "ρινοπλαστική Αθήνα",
+      "βλεφαροπλαστική",
+      "ενδοσκοπική χειρουργική ρινός",
+      "παιδο ΩΡΛ",
+      "Ναταλία Φούρλα",
+    ],
+  },
+  pages: {
+    doctor: {
+      title: "Η ιατρός",
+      eyebrow: "Η ιατρός",
+      crossTitle: "Υπηρεσίες ΩΡΛ",
+      crossBody:
+        "Μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, παιδο-ΩΡΛ. Κάθε πάθηση με το τι είναι, τα συμπτώματά της και τον τρόπο αντιμετώπισης.",
+    },
+    services: {
+      title: "Υπηρεσίες ΩΡΛ",
+      description:
+        "Διαγνωστικές εξετάσεις, παθήσεις μύτης, αυτιού, φάρυγγα, λάρυγγα και τραχήλου, και παιδο-ΩΡΛ. Ακοόγραμμα, τυμπανόγραμμα, ενδοσκόπηση ρινός και λάρυγγα στο ιατρείο.",
+      eyebrow: "Υπηρεσίες",
+      heading: "Ωτορινολαρυγγολογία, από τη διάγνωση ως τη θεραπεία",
+      lead: "Πέντε ομάδες παθήσεων, με τον διαγνωστικό έλεγχο να ολοκληρώνεται στο ιατρείο. Επιλέξτε μια πάθηση για να δείτε τι είναι, με τι εκδηλώνεται και πώς αντιμετωπίζεται.",
+    },
+    facial: {
+      description:
+        "Ρινοπλαστική, βλεφαροπλαστική, αφεστώτα ώτα και εκτομή βλαβών δέρματος ρινός και ώτων, από χειρουργό ΩΡΛ με μετεκπαίδευση στην πλαστική χειρουργική προσώπου.",
+      eyebrow: "Πρόσωπο",
+      crossBody:
+        "Η λειτουργική πλευρά: μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, με πλήρη διαγνωστικό έλεγχο στο ιατρείο.",
+    },
+    practice: {
+      title: "Το ιατρείο",
+      eyebrow: "Ιατρείο",
+      description: (street: string, area: string, minutes: number) =>
+        `Το ιατρείο βρίσκεται στη ${street}, ${area}. Ραντεβού ${minutes} λεπτών, Δευτέρα, Τρίτη και Παρασκευή.`,
+      lead: (street: string, area: string, minutes: number) =>
+        `${street}, ${area}. Κάθε ραντεβού κρατά ${minutes} λεπτά, ώστε η εξέταση να μη βιάζεται.`,
+    },
+    contact: {
+      title: "Επικοινωνία",
+      eyebrow: "Επικοινωνία",
+      heading: "Κλείστε ραντεβού",
+      description: (phone: string, email: string, street: string, area: string) =>
+        `Ραντεβού στο ${phone} ή στο ${email}. ${street}, ${area}, Αθήνα.`,
+      lead: "Τα ραντεβού κλείνονται τηλεφωνικά ή με email. Θα χρειαστεί να γνωρίζουμε τον λόγο της επίσκεψης, ώστε να προγραμματιστεί ο σωστός χρόνος.",
+    },
+  },
+};

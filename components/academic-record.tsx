@@ -1,5 +1,5 @@
 import Reveal from "@/components/reveal";
-import { international, publications } from "@/lib/content";
+import { getContent, type Lang } from "@/lib/i18n";
 
 /**
  * Layout family: two stacked records, each a plain dated list.
@@ -9,17 +9,18 @@ import { international, publications } from "@/lib/content";
  * a reader scanning for a congress or a paper is scanning, not reading, so the
  * year holds the left edge and the title carries the line.
  */
-export default function AcademicRecord() {
+export default function AcademicRecord({ lang }: { lang: Lang }) {
+  const { international, publications, ui } = getContent(lang);
   return (
     <>
       <section className="bg-paper-warm py-14 sm:py-28">
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <Reveal>
             <h2 className="font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900">
-              Διεθνής δραστηριότητα
+              {ui.internationalTitle}
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15.5px] leading-relaxed text-brand-700">
-              Μετεκπαιδεύσεις, συνέδρια και συνεργασίες με κέντρα του εξωτερικού.
+              {ui.internationalLead}
             </p>
           </Reveal>
 
@@ -54,10 +55,10 @@ export default function AcademicRecord() {
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
           <Reveal>
             <h2 className="font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900">
-              Δημοσιεύσεις
+              {ui.publicationsTitle}
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15.5px] leading-relaxed text-brand-700">
-              Επιστημονικό έργο σε διεθνή περιοδικά με κριτές.
+              {ui.publicationsLead}
             </p>
           </Reveal>
 

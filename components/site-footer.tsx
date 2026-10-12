@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { brand, contact, doctor, nav, social } from "@/lib/content";
+import { getContent, type Lang } from "@/lib/i18n";
 
-export default function SiteFooter() {
+export default function SiteFooter({ lang }: { lang: Lang }) {
+  const { brand, contact, doctor, nav, social } = getContent(lang);
   return (
     <footer data-dock-hide className="border-t border-line bg-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8">

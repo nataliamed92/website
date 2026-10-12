@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useId, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Plus } from "@phosphor-icons/react/dist/ssr";
-import { images, medicalNote, services } from "@/lib/content";
+import { images } from "@/lib/assets";
+import type { Service } from "@/lib/content";
 
 /**
  * Layout family: category switcher over an accordion.
@@ -20,7 +21,15 @@ import { images, medicalNote, services } from "@/lib/content";
  * that is the whole point lost. Hence: `hidden` on the inactive families,
  * an animated height on a panel that never unmounts.
  */
-export default function ServicesSection() {
+export default function ServicesSection({
+  services,
+  medicalNote,
+  imageAlt,
+}: {
+  services: readonly Service[];
+  medicalNote: string;
+  imageAlt: string;
+}) {
   const [active, setActive] = useState<string>(services[0].slug);
   const [open, setOpen] = useState<string | null>(null);
   const reduce = useReducedMotion();
@@ -167,7 +176,7 @@ export default function ServicesSection() {
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card lg:sticky lg:top-28 lg:aspect-[4/5] lg:self-start">
             <Image
               src={images.surgery}
-              alt="Η Ναταλία Φούρλα στο χειρουργείο, σε χειρουργικό μικροσκόπιο"
+              alt={imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 38vw"
               className="object-cover"

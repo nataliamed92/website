@@ -5,7 +5,10 @@ import { useId, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "@/components/reveal";
-import { facialSurgery, images, medicalNote } from "@/lib/content";
+import { images } from "@/lib/assets";
+import type { Detail } from "@/lib/content";
+
+type Procedure = Detail & { note: string; list: NonNullable<Detail["list"]> };
 
 /**
  * Layout family: contained split. On the dark theme this ran the photograph
@@ -15,7 +18,15 @@ import { facialSurgery, images, medicalNote } from "@/lib/content";
  * Each procedure keeps its one-line note visible and opens for the detail, the
  * same contract as the conditions list on /ypiresies.
  */
-export default function FacialSection() {
+export default function FacialSection({
+  procedures,
+  medicalNote,
+  imageAlt,
+}: {
+  procedures: readonly Procedure[];
+  medicalNote: string;
+  imageAlt: string;
+}) {
   const [open, setOpen] = useState<string | null>(null);
   const reduce = useReducedMotion();
   const uid = useId();
@@ -27,7 +38,7 @@ export default function FacialSection() {
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-card lg:sticky lg:top-28">
             <Image
               src={images.portrait}
-              alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
+              alt={imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover object-[center_15%]"
@@ -37,7 +48,7 @@ export default function FacialSection() {
 
         <div>
           <ul className="border-t border-line">
-            {facialSurgery.items.map((item, i) => {
+            {procedures.map((item, i) => {
               const isOpen = open === item.name;
               const panelId = `${uid}-${i}`;
               return (

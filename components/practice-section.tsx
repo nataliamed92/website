@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { Clock, MapPin } from "@phosphor-icons/react/dist/ssr";
 import Reveal from "@/components/reveal";
-import { contact, hours, images } from "@/lib/content";
+import { getContent, type Lang } from "@/lib/i18n";
 
 /**
  * Layout family: bento. Three cells for three facts, and the cell sizes follow
  * how much each one has to say.
  */
-export default function PracticeSection() {
+export default function PracticeSection({ lang }: { lang: Lang }) {
+  const { contact, hours, images, ui } = getContent(lang);
   return (
     <section className="bg-paper-warm py-14 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -16,7 +17,7 @@ export default function PracticeSection() {
             <div className="relative h-64 w-full overflow-hidden rounded-card sm:h-96 lg:h-full lg:min-h-[30rem]">
               <Image
                 src={images.room}
-                alt="Ήσυχος χώρος εξέτασης με φυσικό φως, μια πολυθρόνα και ξύλινο τραπεζάκι"
+                alt={ui.alt.room}
                 fill
                 sizes="(max-width: 1024px) 100vw, 62vw"
                 className="object-cover"
@@ -27,7 +28,7 @@ export default function PracticeSection() {
           <Reveal delay={0.08}>
             <div className="flex h-full flex-col rounded-card bg-paper-card p-8">
               <Clock size={22} weight="light" className="text-brand-600" />
-              <h3 className="mt-5 font-display text-[22px] text-brand-900">Ωράριο</h3>
+              <h3 className="mt-5 font-display text-[22px] text-brand-900">{ui.hours}</h3>
               <ul className="mt-6 space-y-3.5">
                 {hours.map((h) => (
                   <li
@@ -40,7 +41,7 @@ export default function PracticeSection() {
                 ))}
               </ul>
               <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-brand-600">
-                Κάθε ραντεβού κρατά {contact.appointmentMinutes} λεπτά.
+                {ui.appointmentLength(contact.appointmentMinutes)}
               </p>
             </div>
           </Reveal>
@@ -48,7 +49,7 @@ export default function PracticeSection() {
           <Reveal delay={0.16}>
             <div className="flex h-full flex-col rounded-card bg-paper-card p-8">
               <MapPin size={22} weight="light" className="text-brand-600" />
-              <h3 className="mt-5 font-display text-[22px] text-brand-900">Διεύθυνση</h3>
+              <h3 className="mt-5 font-display text-[22px] text-brand-900">{ui.address}</h3>
               <p className="mt-6 text-[15.5px] leading-relaxed text-brand-700">
                 {contact.address.street}
                 <br />
@@ -62,7 +63,7 @@ export default function PracticeSection() {
                 rel="noopener noreferrer"
                 className="mt-auto pt-8 text-[14px] font-medium text-brand-600 underline-offset-4 hover:underline"
               >
-                Άνοιγμα στους χάρτες
+                {ui.openMaps}
               </a>
             </div>
           </Reveal>

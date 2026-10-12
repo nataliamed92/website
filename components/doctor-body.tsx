@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/reveal";
-import { credentials, doctor, images, memberships } from "@/lib/content";
+import { getContent, type Lang } from "@/lib/i18n";
 
 /**
  * Layout family: sticky split. The portrait detail holds the left column while
@@ -11,7 +11,8 @@ import { credentials, doctor, images, memberships } from "@/lib/content";
  * header above it therefore carries no lead of its own: two introductions
  * stacked on each other said the same thing twice.
  */
-export default function DoctorBody() {
+export default function DoctorBody({ lang }: { lang: Lang }) {
+  const { credentials, doctor, images, memberships, ui } = getContent(lang);
   return (
     <section className="bg-paper pb-16 sm:pb-32">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
@@ -20,7 +21,7 @@ export default function DoctorBody() {
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-card">
               <Image
                 src={images.portrait}
-                alt="Η Ναταλία Φούρλα, πορτρέτο σε ουδέτερο φόντο"
+                alt={ui.alt.portrait}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover object-[center_15%]"
@@ -42,7 +43,7 @@ export default function DoctorBody() {
 
           <Reveal>
             <h2 className="mt-14 font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900 sm:mt-20">
-              Εκπαίδευση και μετεκπαιδεύσεις
+              {ui.educationTitle}
             </h2>
           </Reveal>
 
@@ -66,7 +67,7 @@ export default function DoctorBody() {
 
           <Reveal>
             <h2 className="mt-14 font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900 sm:mt-20">
-              Μέλος επιστημονικών εταιρειών
+              {ui.membershipsTitle}
             </h2>
           </Reveal>
 

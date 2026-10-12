@@ -10,30 +10,39 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import PageHeader from "@/components/page-header";
 import Reveal from "@/components/reveal";
-import { contact, hours, images, social } from "@/lib/content";
+import { alternates, getContent, type Lang } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Επικοινωνία",
-  description: `Ραντεβού στο ${contact.phone.display} ή στο ${contact.email}. ${contact.address.street}, ${contact.address.area}, Αθήνα.`,
-  alternates: { canonical: "/epikoinonia" },
-};
-
-const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  contact.address.mapsQuery,
-)}`;
+export function contactMetadata(lang: Lang): Metadata {
+  const { contact, ui } = getContent(lang);
+  return {
+    title: ui.pages.contact.title,
+    description: ui.pages.contact.description(
+      contact.phone.display,
+      contact.email,
+      contact.address.street,
+      contact.address.area,
+    ),
+    alternates: alternates("contact", lang),
+  };
+}
 
 const socialIcon = {
   Instagram: InstagramLogo,
   TikTok: TiktokLogo,
 } as const;
 
-export default function Page() {
+export default function ContactView({ lang }: { lang: Lang }) {
+  const { contact, hours, images, social, ui } = getContent(lang);
+  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    contact.address.mapsQuery,
+  )}`;
+
   return (
     <>
       <PageHeader
-        eyebrow="Επικοινωνία"
-        title="Κλείστε ραντεβού"
-        lead="Τα ραντεβού κλείνονται τηλεφωνικά ή με email. Θα χρειαστεί να γνωρίζουμε τον λόγο της επίσκεψης, ώστε να προγραμματιστεί ο σωστός χρόνος."
+        eyebrow={ui.pages.contact.eyebrow}
+        title={ui.pages.contact.heading}
+        lead={ui.pages.contact.lead}
       />
 
       {/* Layout family: two priority actions above a quiet detail column. */}
@@ -48,7 +57,7 @@ export default function Page() {
                 <Phone size={24} weight="light" />
                 <div>
                   <p className="text-[13px] font-semibold tracking-[0.14em] uppercase opacity-70">
-                    Τηλέφωνο
+                    {ui.phone}
                   </p>
                   <p className="mt-2 font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-none">
                     {contact.phone.display}
@@ -65,7 +74,7 @@ export default function Page() {
                 <EnvelopeSimple size={24} weight="light" className="text-brand-600" />
                 <div>
                   <p className="text-[13px] font-semibold tracking-[0.14em] text-brand-600 uppercase">
-                    Email
+                    {ui.email}
                   </p>
                   <p className="mt-2 font-display text-[clamp(1.3rem,2.6vw,1.9rem)] leading-tight break-all text-brand-900">
                     {contact.email}
@@ -79,7 +88,7 @@ export default function Page() {
             <Reveal>
               <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
                 <MapPin size={22} weight="light" className="text-brand-600" />
-                <h2 className="mt-5 font-display text-[22px] text-brand-900">Διεύθυνση</h2>
+                <h2 className="mt-5 font-display text-[22px] text-brand-900">{ui.address}</h2>
                 <p className="mt-5 text-[15.5px] leading-relaxed text-brand-700">
                   {contact.address.street}
                   <br />
@@ -91,7 +100,7 @@ export default function Page() {
                   rel="noopener noreferrer"
                   className="mt-auto pt-8 text-[14px] font-medium text-brand-600 underline-offset-4 hover:underline"
                 >
-                  Άνοιγμα στους χάρτες
+                  {ui.openMaps}
                 </a>
               </div>
             </Reveal>
@@ -99,7 +108,7 @@ export default function Page() {
             <Reveal delay={0.08}>
               <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
                 <Clock size={22} weight="light" className="text-brand-600" />
-                <h2 className="mt-5 font-display text-[22px] text-brand-900">Ωράριο</h2>
+                <h2 className="mt-5 font-display text-[22px] text-brand-900">{ui.hours}</h2>
                 <ul className="mt-5 space-y-3.5">
                   {hours.map((h) => (
                     <li
@@ -112,14 +121,14 @@ export default function Page() {
                   ))}
                 </ul>
                 <p className="mt-auto pt-8 text-[13.5px] leading-relaxed text-brand-600">
-                  Κάθε ραντεβού κρατά {contact.appointmentMinutes} λεπτά.
+                  {ui.appointmentLength(contact.appointmentMinutes)}
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.16}>
               <div className="flex h-full flex-col rounded-card bg-paper-warm p-8">
-                <h2 className="font-display text-[22px] text-brand-900">Στα social</h2>
+                <h2 className="font-display text-[22px] text-brand-900">{ui.social}</h2>
                 <ul className="mt-4 space-y-1">
                   {social.map((s) => {
                     const Icon = socialIcon[s.label as keyof typeof socialIcon];
@@ -147,7 +156,7 @@ export default function Page() {
       <section className="relative h-[38vh] min-h-[16rem] w-full overflow-hidden">
         <Image
           src={images.avenue}
-          alt="Κεντρική λεωφόρος της Αθήνας το βράδυ, με φωτισμένα δέντρα και βρεγμένη άσφαλτο"
+          alt={ui.alt.avenue}
           fill
           sizes="100vw"
           className="object-cover"

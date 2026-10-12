@@ -3,7 +3,18 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { contact, doctor, video } from "@/lib/content";
+import { video } from "@/lib/assets";
+
+type HeroProps = {
+  name: string;
+  specialty: string;
+  subSpecialty: string;
+  tagline: string;
+  phoneHref: string;
+  book: string;
+  servicesLabel: string;
+  servicesHref: string;
+};
 
 /**
  * Asymmetric hero. The backdrop is the logo drawing itself on a black frame,
@@ -13,7 +24,16 @@ import { contact, doctor, video } from "@/lib/content";
  * Motion: the frame drifts a little slower than the page on scroll, which marks
  * the hero as a layer the reader is leaving. The film itself loops on black.
  */
-export default function Hero() {
+export default function Hero({
+  name,
+  specialty,
+  subSpecialty,
+  tagline,
+  phoneHref,
+  book,
+  servicesLabel,
+  servicesHref,
+}: HeroProps) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const [portrait, setPortrait] = useState<boolean | null>(null);
@@ -85,7 +105,7 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="text-[clamp(1.9rem,6.4vw,4.25rem)] leading-[1.18] font-light tracking-[0.1em] break-words text-brand-900 uppercase sm:tracking-[0.18em]"
           >
-            {doctor.name}
+            {name}
           </motion.h1>
 
           <motion.p
@@ -95,9 +115,9 @@ export default function Hero() {
             className="mt-6 max-w-[34rem] text-[15.5px] leading-relaxed text-brand-700 sm:text-[17px]"
           >
             <span className="text-brand-900">
-              {doctor.specialty}, {doctor.subSpecialty}.
+              {specialty}, {subSpecialty}.
             </span>{" "}
-            {doctor.tagline}.
+            {tagline}.
           </motion.p>
 
           <motion.div
@@ -107,16 +127,16 @@ export default function Hero() {
             className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
           >
             <a
-              href={contact.phone.href}
+              href={phoneHref}
               className="rounded-full bg-brand-600 px-7 py-3.5 text-center text-[15px] font-semibold whitespace-nowrap text-white transition-all duration-200 hover:bg-brand-700 active:translate-y-[1px]"
             >
-              Κλείστε ραντεβού
+              {book}
             </a>
             <a
-              href="#ypiresies"
+              href={servicesHref}
               className="rounded-full border border-line-strong px-7 py-3.5 text-center text-[15px] font-medium whitespace-nowrap text-brand-900 transition-colors duration-200 hover:border-brand-500 hover:text-brand-800"
             >
-              Οι υπηρεσίες
+              {servicesLabel}
             </a>
           </motion.div>
         </div>
