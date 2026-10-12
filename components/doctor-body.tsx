@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Reveal from "@/components/reveal";
-import { credentials, images } from "@/lib/content";
+import { credentials, doctor, images, memberships } from "@/lib/content";
 
 /**
  * Layout family: sticky split. The portrait detail holds the left column while
- * the training record scrolls past it on the right.
+ * the biography, the training record and the societies scroll past it on the
+ * right.
+ *
+ * The prose comes first and is the doctor's own, added 2026-10-12. The page
+ * header above it therefore carries no lead of its own: two introductions
+ * stacked on each other said the same thing twice.
  */
 export default function DoctorBody() {
   return (
@@ -25,8 +30,18 @@ export default function DoctorBody() {
         </div>
 
         <div>
+          <div className="max-w-[58ch] space-y-5">
+            {doctor.profile.map((para, i) => (
+              <Reveal key={para.slice(0, 32)} delay={i * 0.06}>
+                <p className="text-[16px] leading-relaxed text-brand-700 sm:text-[17px]">
+                  {para}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+
           <Reveal>
-            <h2 className="font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900">
+            <h2 className="mt-14 font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900 sm:mt-20">
               Εκπαίδευση και μετεκπαιδεύσεις
             </h2>
           </Reveal>
@@ -48,6 +63,22 @@ export default function DoctorBody() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal>
+            <h2 className="mt-14 font-display text-[clamp(1.6rem,3vw,2.1rem)] leading-snug font-normal text-brand-900 sm:mt-20">
+              Μέλος επιστημονικών εταιρειών
+            </h2>
+          </Reveal>
+
+          <ul className="mt-8 border-t border-line">
+            {memberships.map((name, i) => (
+              <Reveal key={name} delay={i * 0.06}>
+                <li className="border-b border-line py-5 text-[15.5px] leading-relaxed text-brand-800">
+                  {name}
+                </li>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

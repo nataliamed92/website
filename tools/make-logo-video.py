@@ -36,7 +36,10 @@ FPS = 30
 # composited subtractively - ink is removed from a white frame - because a white
 # page cannot be lit, only shaded.
 PAPER = np.array([255, 255, 255], dtype=np.float32) / 255.0
-INK = np.array([0x70, 0x4C, 0x29], dtype=np.float32) / 255.0
+# Beiger since 2026-10-12, at the client's request, and matched to
+# `prepare-logo.py`'s INK_ON_LIGHT so the film and the still mark are one
+# colour. Change them together or the hero will not match the footer.
+INK = np.array([0xAE, 0x79, 0x47], dtype=np.float32) / 255.0
 WARM = np.array([0xE2, 0xC1, 0xA2], dtype=np.float32) / 255.0
 
 
@@ -255,6 +258,17 @@ def main() -> None:
     # Standalone films, with the wordmark, for social.
     render(OUT / "logo-16x9.mp4", 1920 // d, 1080 // d, 8.0, 0.44, (0.50, 0.42), True, args.fast)
     render(OUT / "logo-9x16.mp4", 1080 // d, 1920 // d, 8.0, 0.26, (0.50, 0.40), True, args.fast)
+
+    # The poster: the hold, after the pen has finished and before the fade.
+    # It used to be grabbed by hand, which meant it still showed the previous
+    # artwork for as long as nobody looked.
+    poster = OUT / "hero-poster.jpg"
+    subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-ss", "7.0",
+         "-i", str(OUT / "hero-16x9.mp4"), "-frames:v", "1", "-q:v", "3", str(poster)],
+        check=True,
+    )
+    print(f"{poster.name}  {poster.stat().st_size/1024:.0f} KB")
 
 
 if __name__ == "__main__":

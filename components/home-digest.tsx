@@ -115,11 +115,11 @@ export default function HomeDigest() {
               >
                 <div className="relative h-56 w-full sm:h-72">
                   <Image
-                    src={images.candid}
-                    alt="Η Ναταλία Φούρλα με ιατρική μπλούζα"
+                    src={images.operating}
+                    alt="Η Ναταλία Φούρλα στο χειρουργείο, με χειρουργική στολή και μάσκα"
                     fill
                     sizes="(max-width: 768px) 100vw, 48vw"
-                    className="object-cover object-[30%_top]"
+                    className="object-cover object-[37%_26%]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-8 sm:p-10">

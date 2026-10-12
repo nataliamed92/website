@@ -19,7 +19,6 @@ export default function Page() {
         eyebrow="Η ιατρός"
         title={doctor.name}
         titleNote={`${doctor.credentials} · ${doctor.specialty}, ${doctor.subSpecialty}`}
-        lead={doctor.bio}
       />
       <DoctorBody />
       <AcademicRecord />
@@ -28,9 +27,9 @@ export default function Page() {
         body="Μύτη, αυτί, φάρυγγας, λάρυγγας και τράχηλος, παιδο-ΩΡΛ. Κάθε πάθηση με το τι είναι, τα συμπτώματά της και τον τρόπο αντιμετώπισης."
         href="/ypiresies"
         cta="Δείτε τις υπηρεσίες"
-        image={images.candid}
-        imageAlt="Η Ναταλία Φούρλα με ιατρική μπλούζα"
-        imagePosition="object-[30%_top]"
+        image={images.operating}
+        imageAlt="Η Ναταλία Φούρλα στο χειρουργείο, με χειρουργική στολή και μάσκα"
+        imagePosition="object-[37%_26%]"
       />
       <ClosingCta />
     </>

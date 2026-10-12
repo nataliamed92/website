@@ -30,10 +30,23 @@ export const doctor = {
   name: "Ναταλία Φούρλα",
   credentials: "MD, MSc",
   fullName: "Ναταλία Φούρλα MD, MSc",
-  specialty: "Ωτορινολαρυγγολόγος",
+  specialty: "Χειρουργός Ωτορινολαρυγγολόγος",
   subSpecialty: "Πλαστική Χειρουργική Προσώπου",
   tagline: "Με γνώση και σεβασμό για τον άνθρωπο-ασθενή",
-  bio: "Ειδικευμένη στη Χειρουργική ΩΡΛ και στη Χειρουργική Κεφαλής και Τραχήλου στο μεγαλύτερο νοσοκομείο της χώρας, το ΓΝΑ «Ευαγγελισμός». Μεταπτυχιακό στη Χειρουργική Ανατομία στο ΕΚΠΑ, με μετεκπαιδεύσεις στην Ενδοσκοπική Χειρουργική Ρινός και στην Πλαστική Χειρουργική Προσώπου.",
+  bio: "Ειδικευμένη στη Χειρουργική ΩΡΛ και στη Χειρουργική Κεφαλής και Τραχήλου στο μεγαλύτερο νοσοκομείο της χώρας, το ΓΝΑ «Ευαγγελισμός». Μεταπτυχιακό στη Χειρουργική Ανατομία στην Ιατρική Σχολή Αθηνών του Εθνικού και Καποδιστριακού Πανεπιστημίου Αθηνών, με μετεκπαιδεύσεις στην Ενδοσκοπική Χειρουργική Ρινός και στην Πλαστική Χειρουργική Προσώπου. Συνεργάτης της ομάδας Iatroaesthetics και του χειρουργού κ. Μακρυπίδη Κ. από το 2019.",
+
+  /**
+   * Her own biography, sent on 2026-10-12 and reproduced word for word. `bio`
+   * above stays the short form: it is the share description and the home
+   * page's introduction, where five paragraphs do not fit. This is the long
+   * form, and it is the only text on the site she wrote herself.
+   */
+  profile: [
+    "Η Ναταλία Φούρλα, MD, MSc είναι Χειρουργός Ωτορινολαρυγγολόγος – Χειρουργός Κεφαλής και Τραχήλου, απόφοιτη της Ιατρικής Σχολής με βαθμό Άριστα (9,80/10). Έχει ολοκληρώσει την ειδικότητά της στο ΓΝΑ «Ο Ευαγγελισμός», όπου απέκτησε σημαντική κλινική και χειρουργική εμπειρία σε όλο το φάσμα της σύγχρονης Ωτορινολαρυγγολογίας και στην αντιμετώπιση επειγόντων περιστατικών.",
+    "Είναι κάτοχος MSc στη Χειρουργική Ανατομία από την Ιατρική Σχολή του ΕΚΠΑ και έχει μετεκπαιδευτεί στην ενδοσκοπική χειρουργική της ρινός και των παραρρινίων κόλπων στην Ιταλία, καθώς και στη Χειρουργική Πλαστική Προσώπου, με ιδιαίτερο ενδιαφέρον στη λειτουργική και αισθητική χειρουργική της ρινός.",
+    "Από το 2019 είναι συνεργάτης της ομάδας Iatroaesthetics και του χειρουργού Κωνσταντίνου Μακρυπίδη, συμμετέχοντας στην αντιμετώπιση και χειρουργική διαχείριση περιστατικών ΩΡΛ και εξειδικευμένων επεμβάσεων Πλαστικής Χειρουργικής Προσώπου.",
+    "Παράλληλα, αναλαμβάνει παιδο-ΩΡΛ περιστατικά, έχοντας αποκτήσει κλινική και χειρουργική εμπειρία στο Νοσοκομείο Παίδων Πεντέλης. Διατηρεί ενεργή επιστημονική παρουσία με συμμετοχή σε ελληνικά και διεθνή συνέδρια, καθώς και σε επιστημονικές εργασίες και δημοσιεύσεις στον χώρο της Ωτορινολαρυγγολογίας και της Χειρουργικής Προσώπου.",
+  ],
 } as const;
 
 /** Training milestones, drawn strictly from the bio above. */
@@ -45,7 +58,7 @@ export const credentials = [
   },
   {
     title: "Μεταπτυχιακό στη Χειρουργική Ανατομία",
-    place: "ΕΚΠΑ",
+    place: "Ιατρική Σχολή Αθηνών του Εθνικού και Καποδιστριακού Πανεπιστημίου Αθηνών",
     note: "Ανατομική θεμελίωση κάθε χειρουργικής απόφασης.",
   },
   {
@@ -712,7 +725,7 @@ export const international = [
     year: "Ιανουάριος 2026",
     title: "Clinical attachment στη Χειρουργική Κεφαλής και Τραχήλου",
     place: "Sant'Anna Hospital, Como, Ιταλία",
-    note: "Τμήμα Ωτορινολαρυγγολογίας, υπό τον Prof. P. Battaglia.",
+    note: "Τμήμα Ωτορινολαρυγγολογίας, υπό τους Prof. P. Battaglia και Prof. Castelnuovo.",
   },
   {
     year: "Δεκέμβριος 2025",
@@ -756,6 +769,18 @@ export const international = [
     place: "Ellis Medical Center, Schenectady, New York, ΗΠΑ",
     note: null,
   },
+] as const;
+
+/**
+ * Learned societies she belongs to, named as she named them on 2026-10-12.
+ * No acronym is printed beside them: she gave none, and the English initials
+ * of a Greek society are exactly the kind of detail that is wrong once and
+ * then quoted forever.
+ */
+export const memberships = [
+  "Ευρωπαϊκή Εταιρεία Πλαστικής Χειρουργικής Προσώπου",
+  "Ελληνική Ρινολογική Εταιρεία Πλαστικής Χειρουργικής Προσώπου",
+  "Πανελλήνια Ωτορινολαρυγγολογική Εταιρεία",
 ] as const;
 
 export const contact = {
@@ -809,10 +834,11 @@ export const video = {
 } as const;
 
 /**
- * `portrait`, `surgery` and `candid` are REAL photographs, supplied by the
- * practice on 2026-09-21. `surgery` was cropped so that no patient appears in
- * frame; `candid` was cropped to remove a third party's watermark and is low
- * resolution, so it is only ever used small.
+ * `portrait`, `surgery` and `operating` are REAL photographs supplied by the
+ * practice. `surgery` was cropped so that no patient appears in frame.
+ * `operating` arrived on 2026-10-12 and replaced the selfie that used to sit
+ * in its place, at the doctor's request; it is full resolution, so unlike the
+ * selfie it is no longer restricted to small cards.
  *
  * The generated face studies were deleted on 2026-09-22 at the client's
  * request: no invented face may stand in for her work. What remains generated
@@ -822,7 +848,7 @@ export const video = {
 export const images = {
   portrait: "/img/portrait.jpg",
   surgery: "/img/surgery.jpg",
-  candid: "/img/clinic-candid.jpg",
+  operating: "/img/operating.jpg",
   room: "/img/consultation-room.jpg",
   avenue: "/img/athens-avenue.jpg",
 } as const;
