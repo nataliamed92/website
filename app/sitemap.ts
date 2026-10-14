@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/content";
 import { pages } from "@/lib/routes";
 
+/** GitHub Pages has no server: written once at build time. */
+export const dynamic = "force-static";
+
 /** Both languages, each entry naming its counterpart for hreflang. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const abs = (path: string) => `${siteUrl}${path === "/" ? "" : path}`;

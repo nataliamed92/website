@@ -12,7 +12,7 @@
  * results. They await the doctor's own review.
  */
 
-export const siteUrl = "https://natalia-fourla.vercel.app";
+export const siteUrl = "https://drnataliafourla.gr";
 
 /**
  * The site's routes, in nav order. Header, footer and sitemap all read this,
