@@ -746,6 +746,7 @@ export const ui = {
     portrait: "Natalia Fourla, portrait on a neutral background",
     surgery: "Natalia Fourla in the operating theatre, at a surgical microscope",
     operating: "Natalia Fourla in the operating theatre, in surgical scrubs and a mask",
+    pediatric: "Natalia Fourla examining a child's ear with an otoscope",
     room: "A quiet examination room in natural light, with an armchair and a wooden side table",
     avenue: "A central avenue in Athens at night, with lit trees and wet asphalt",
   },

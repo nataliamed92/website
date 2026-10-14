@@ -23,7 +23,9 @@ export default function ServicesView({ lang }: { lang: Lang }) {
         title={ui.pages.services.heading}
         lead={ui.pages.services.lead}
       />
-      <ServicesSection services={services} medicalNote={medicalNote} imageAlt={ui.alt.surgery} />
+      <ServicesSection services={services} medicalNote={medicalNote} imageAlt={ui.alt.surgery}
+        pediatricAlt={ui.alt.pediatric}
+      />
       <CrossLink
         title={facialSurgery.title}
         body={facialSurgery.lead}

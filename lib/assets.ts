@@ -30,6 +30,9 @@ export const video = {
  * in its place, at the doctor's request; it is full resolution, so unlike the
  * selfie it is no longer restricted to small cards.
  *
+ * `pediatric` (2026-10-14) was supplied by the practice for the Παιδο-ΩΡΛ
+ * family on the services page; the child faces away from camera.
+ *
  * The generated face studies were deleted on 2026-09-22 at the client's
  * request: no invented face may stand in for her work. What remains generated
  * is `room` and `avenue`, which are places rather than people, and which she
@@ -39,6 +42,7 @@ export const images = {
   portrait: "/img/portrait.jpg",
   surgery: "/img/surgery.jpg",
   operating: "/img/operating.jpg",
+  pediatric: "/img/pediatric-exam.jpg",
   room: "/img/consultation-room.jpg",
   avenue: "/img/athens-avenue.jpg",
 } as const;

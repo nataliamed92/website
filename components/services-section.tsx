@@ -25,15 +25,20 @@ export default function ServicesSection({
   services,
   medicalNote,
   imageAlt,
+  pediatricAlt,
 }: {
   services: readonly Service[];
   medicalNote: string;
   imageAlt: string;
+  pediatricAlt: string;
 }) {
   const [active, setActive] = useState<string>(services[0].slug);
   const [open, setOpen] = useState<string | null>(null);
   const reduce = useReducedMotion();
   const uid = useId();
+
+  // Παιδο-ΩΡΛ gets its own photograph; every other family keeps the surgery one.
+  const pediatric = active === "paido-orl";
 
   function switchFamily(slug: string) {
     setActive(slug);
@@ -175,11 +180,12 @@ export default function ServicesSection({
 
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card lg:sticky lg:top-28 lg:aspect-[4/5] lg:self-start">
             <Image
-              src={images.surgery}
-              alt={imageAlt}
+              key={pediatric ? "pediatric" : "surgery"}
+              src={pediatric ? images.pediatric : images.surgery}
+              alt={pediatric ? pediatricAlt : imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 38vw"
-              className="object-cover"
+              className={`object-cover ${pediatric ? "object-[center_30%]" : ""}`}
             />
           </div>
         </div>
